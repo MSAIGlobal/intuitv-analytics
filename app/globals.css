@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { margin: 0; padding: 0; background: #000814; color: white; }
+@keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.6; } }
