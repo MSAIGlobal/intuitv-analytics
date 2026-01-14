@@ -2,13 +2,6 @@
 
 'use client'
 
-import { useState, useEffect, cloneElement, type ReactElement, type ReactNode } from 'react'
-
-import DataFarmContentLibrary from '../../playout/app/components/DataFarmContentLibrary'
-
-// In analytics page:
-<DataFarmContentLibrary />
-
 import {
   LineChart,
   Line,
