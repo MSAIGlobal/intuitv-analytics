@@ -2,6 +2,7 @@
 
 'use client'
 
+import { useState, useEffect, ReactNode, ReactElement, cloneElement } from 'react'
 import {
   LineChart,
   Line,
@@ -16,11 +17,11 @@ import {
   ResponsiveContainer,
   Legend,
 } from 'recharts'
-import { 
-  TrendingUp, 
-  Users, 
-  Eye, 
-  Clock, 
+import {
+  TrendingUp,
+  Users,
+  Eye,
+  Clock,
   Play,
   Globe,
   AlertCircle,
@@ -337,13 +338,6 @@ return (
             Analytics Dashboard
           </h1>
         </a>
-
-        {/* Right side content continues here */}
-      </div>
-    </header>
-  </div>
-);
-
 
           {/* Right: Search + Actions */}
           <div className="flex items-center gap-3">
