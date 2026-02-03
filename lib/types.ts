@@ -327,3 +327,139 @@ export interface ApiError {
   status: number;
   details?: Record<string, any>;
 }
+
+// Analytics Dashboard Types
+export interface AnalyticsFilters {
+  dateRange: {
+    start: string;
+    end: string;
+  };
+  platforms?: ('tv' | 'mobile' | 'web')[];
+  countries?: string[];
+  channelIds?: string[];
+  creatorIds?: string[];
+  studioIds?: string[];
+}
+
+export interface KPIMetrics {
+  totalViews: number;
+  totalWatchHours: number;
+  uniqueViewers: number;
+  avgSessionDuration: number;
+  concurrentStreams: number;
+}
+
+export interface TimeSeriesData {
+  timestamp: string;
+  views: number;
+  watchTime: number;
+  uniqueViewers: number;
+  sessionStarts: number;
+  sessionEnds: number;
+}
+
+export interface ChannelRanking {
+  channelId: string;
+  channelName: string;
+  creatorName?: string;
+  views: number;
+  watchTime: number;
+  avgSessionDuration: number;
+}
+
+export interface GeoData {
+  countryCode: string;
+  country: string;
+  views: number;
+  watchHours: number;
+  uniqueViewers: number;
+  percentage: number;
+}
+
+export interface StateData {
+  stateCode: string;
+  state: string;
+  views: number;
+  watchHours: number;
+  uniqueViewers: number;
+}
+
+export interface DeviceInfo {
+  deviceType: string;
+  os?: string;
+  count: number;
+  avgWatchTime: number;
+  appVersion?: string;
+}
+
+export interface PlatformBreakdown {
+  platform: 'tv' | 'mobile' | 'web';
+  views: number;
+  watchHours: number;
+  uniqueViewers: number;
+  devices: DeviceInfo[];
+}
+
+export interface DropoffPoint {
+  contentId: string;
+  contentTitle: string;
+  timestamp: number;
+  dropoffPercentage: number;
+}
+
+export interface ViewerBehavior {
+  completionRate: number;
+  dropoffRate: number;
+  avgWatchTimePerContent: number;
+  repeatViewerFrequency: number;
+  topDropoffPoints?: DropoffPoint[];
+}
+
+export interface CreatorAnalytics {
+  creatorId: string;
+  creatorName: string;
+  views: number;
+  watchTime: number;
+  channelGrowth: number;
+  avgPerformance: number;
+  aiGeneratedContent: number;
+  uploadedContent: number;
+}
+
+export interface StudioAnalytics {
+  studioId: string;
+  studioName: string;
+  views: number;
+  watchTime: number;
+  channels: number;
+  topChannels?: {
+    channelId: string;
+    channelName: string;
+    views: number;
+  }[];
+}
+
+export interface SupportTicket {
+  id?: string;
+  requesterId: string;
+  requesterRole: 'admin' | 'creator' | 'viewer';
+  tenantId: string;
+  contextType: 'analytics' | 'playout' | 'channel' | 'content';
+  contextId?: string;
+  category: 'analytics' | 'playout' | 'ai' | 'billing' | 'technical' | 'other';
+  priority: 'low' | 'medium' | 'high' | 'critical';
+  subject: string;
+  description: string;
+  status: 'open' | 'in_progress' | 'resolved' | 'closed';
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface TicketMessage {
+  id?: string;
+  senderId: string;
+  senderName: string;
+  message: string;
+  timestamp?: string;
+  attachments?: string[];
+}
