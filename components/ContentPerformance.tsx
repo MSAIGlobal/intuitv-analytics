@@ -15,6 +15,19 @@ import {
   AreaChart
 } from 'recharts';
 import { analyticsClient, ContentStats } from '@/shared/api/analyticsClient';
+import Reveal from './Reveal';
+
+const BRAND = '#C6F833';
+const BRAND_BRIGHT = '#D8FF5E';
+const INK = '#0A0A0A';
+const PAPER = '#F6F6F1';
+
+const TOOLTIP_STYLE = {
+  backgroundColor: INK,
+  border: `2px solid ${BRAND}`,
+  borderRadius: '8px',
+  color: PAPER,
+};
 
 interface ContentPerformanceProps {
   contentId: number;
@@ -48,14 +61,14 @@ export const ContentPerformance: React.FC<ContentPerformanceProps> = ({
   if (loading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-500"></div>
+        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#C6F833]"></div>
       </div>
     );
   }
 
   if (!stats || stats.length === 0) {
     return (
-      <div className="text-center p-8 text-gray-500">
+      <div className="text-center p-8 text-[rgba(10,10,10,0.6)]">
         No performance data available
       </div>
     );
@@ -70,180 +83,153 @@ export const ContentPerformance: React.FC<ContentPerformanceProps> = ({
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-center">
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Content Performance Analytics
-          </h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            {stats.length} data points • Last updated: {new Date().toLocaleDateString()}
-          </p>
-        </div>
+      <Reveal>
+        <div className="flex justify-between items-center">
+          <div>
+            <h2 className="font-display text-3xl text-[#0A0A0A]">
+              Content Performance Analytics
+            </h2>
+            <p className="text-sm text-[rgba(10,10,10,0.65)]">
+              {stats.length} data points • Last updated: {new Date().toLocaleDateString()}
+            </p>
+          </div>
 
-        {/* Timeframe Selector */}
-        <div className="flex gap-2">
-          {['24h', '7d', '30d', '90d', 'all'].map((tf) => (
-            <button
-              key={tf}
-              onClick={() => setSelectedTimeframe(tf as any)}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                selectedTimeframe === tf
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300'
-              }`}
-            >
-              {tf === '24h' ? '24 Hours' :
-               tf === '7d' ? '7 Days' :
-               tf === '30d' ? '30 Days' :
-               tf === '90d' ? '90 Days' : 'All Time'}
-            </button>
-          ))}
+          {/* Timeframe Selector */}
+          <div className="flex gap-2">
+            {['24h', '7d', '30d', '90d', 'all'].map((tf) => (
+              <button
+                key={tf}
+                onClick={() => setSelectedTimeframe(tf as any)}
+                className={`px-4 py-2 rounded-lg font-bold border-2 border-[#0A0A0A] transition-all hover:scale-105 ${
+                  selectedTimeframe === tf
+                    ? 'bg-[#0A0A0A] text-[#C6F833]'
+                    : 'bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E]'
+                }`}
+              >
+                {tf === '24h' ? '24 Hours' :
+                 tf === '7d' ? '7 Days' :
+                 tf === '30d' ? '30 Days' :
+                 tf === '90d' ? '90 Days' : 'All Time'}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      </Reveal>
 
       {/* Summary Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard
-          title="Total Views"
-          value={totalViews.toLocaleString()}
-          icon="👁️"
-          trend="+12%"
-        />
-        <StatCard
-          title="Avg Engagement"
-          value={`${(avgEngagement * 100).toFixed(1)}%`}
-          icon="💥"
-          trend="+8%"
-        />
-        <StatCard
-          title="Avg Watch Time"
-          value={`${avgWatchTime.toFixed(1)}m`}
-          icon="⏱️"
-          trend="+5%"
-        />
-        <StatCard
-          title="Completion Rate"
-          value={`${(avgCompletionRate * 100).toFixed(1)}%`}
-          icon="✅"
-          trend="+3%"
-        />
+        {[
+          { title: 'Total Views', value: totalViews.toLocaleString(), icon: '👁️', trend: '+12%' },
+          { title: 'Avg Engagement', value: `${(avgEngagement * 100).toFixed(1)}%`, icon: '💥', trend: '+8%' },
+          { title: 'Avg Watch Time', value: `${avgWatchTime.toFixed(1)}m`, icon: '⏱️', trend: '+5%' },
+          { title: 'Completion Rate', value: `${(avgCompletionRate * 100).toFixed(1)}%`, icon: '✅', trend: '+3%' },
+        ].map((c, i) => (
+          <Reveal key={c.title} delay={i * 70}>
+            <StatCard title={c.title} value={c.value} icon={c.icon} trend={c.trend} />
+          </Reveal>
+        ))}
       </div>
 
       {/* Views Over Time Chart */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
-        <h3 className="text-lg font-semibold mb-4">Views Over Time</h3>
-        <ResponsiveContainer width="100%" height={300}>
-          <AreaChart data={stats}>
-            <defs>
-              <linearGradient id="colorViews" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#00AEFF" stopOpacity={0.8}/>
-                <stop offset="95%" stopColor="#00AEFF" stopOpacity={0}/>
-              </linearGradient>
-            </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-            <XAxis 
-              dataKey="date" 
-              stroke="#666"
-            />
-            <YAxis stroke="#666" />
-            <Tooltip 
-              contentStyle={{ 
-                backgroundColor: '#1f2937', 
-                border: 'none', 
-                borderRadius: '8px',
-                color: '#fff'
-              }}
-            />
-            <Area 
-              type="monotone" 
-              dataKey="views" 
-              stroke="#00AEFF" 
-              fillOpacity={1} 
-              fill="url(#colorViews)" 
-            />
-          </AreaChart>
-        </ResponsiveContainer>
-      </div>
+      <Reveal>
+        <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+          <h3 className="font-display text-2xl text-[#C6F833] mb-4">Views Over Time</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <AreaChart data={stats}>
+              <defs>
+                <linearGradient id="cpColorViews" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor={BRAND} stopOpacity={0.45}/>
+                  <stop offset="95%" stopColor={BRAND} stopOpacity={0}/>
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
+              <XAxis dataKey="date" stroke="rgba(246,246,241,0.6)" />
+              <YAxis stroke="rgba(246,246,241,0.6)" />
+              <Tooltip contentStyle={TOOLTIP_STYLE} />
+              <Area
+                type="monotone"
+                dataKey="views"
+                stroke={BRAND}
+                strokeWidth={2}
+                fillOpacity={1}
+                fill="url(#cpColorViews)"
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </Reveal>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Engagement Over Time */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
-          <h3 className="text-lg font-semibold mb-4">Engagement Rate</h3>
-          <ResponsiveContainer width="100%" height={250}>
+        <Reveal>
+          <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+            <h3 className="font-display text-2xl text-[#C6F833] mb-4">Engagement Rate</h3>
+            <ResponsiveContainer width="100%" height={250}>
+              <LineChart data={stats}>
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
+                <XAxis dataKey="date" stroke="rgba(246,246,241,0.6)" />
+                <YAxis stroke="rgba(246,246,241,0.6)" />
+                <Tooltip
+                  contentStyle={TOOLTIP_STYLE}
+                  formatter={(value: any) => `${(value * 100).toFixed(1)}%`}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="engagement"
+                  stroke={BRAND}
+                  strokeWidth={2}
+                  dot={{ fill: BRAND }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </Reveal>
+
+        {/* Watch Time Analysis */}
+        <Reveal delay={80}>
+          <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+            <h3 className="font-display text-2xl text-[#C6F833] mb-4">Average Watch Time</h3>
+            <ResponsiveContainer width="100%" height={250}>
+              <BarChart data={stats}>
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
+                <XAxis dataKey="date" stroke="rgba(246,246,241,0.6)" />
+                <YAxis stroke="rgba(246,246,241,0.6)" />
+                <Tooltip
+                  cursor={{ fill: 'rgba(198,248,51,0.12)' }}
+                  contentStyle={TOOLTIP_STYLE}
+                  formatter={(value: any) => `${value.toFixed(1)}m`}
+                />
+                <Bar dataKey="avg_watch_time" fill={BRAND} radius={[8, 8, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </Reveal>
+      </div>
+
+      {/* Completion Rate Chart */}
+      <Reveal>
+        <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+          <h3 className="font-display text-2xl text-[#C6F833] mb-4">Completion Rate Trend</h3>
+          <ResponsiveContainer width="100%" height={200}>
             <LineChart data={stats}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-              <XAxis dataKey="date" stroke="#666" />
-              <YAxis stroke="#666" />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: '#1f2937', 
-                  border: 'none', 
-                  borderRadius: '8px',
-                  color: '#fff'
-                }}
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
+              <XAxis dataKey="date" stroke="rgba(246,246,241,0.6)" />
+              <YAxis stroke="rgba(246,246,241,0.6)" />
+              <Tooltip
+                contentStyle={TOOLTIP_STYLE}
                 formatter={(value: any) => `${(value * 100).toFixed(1)}%`}
               />
-              <Line 
-                type="monotone" 
-                dataKey="engagement" 
-                stroke="#00AEFF" 
+              <Line
+                type="monotone"
+                dataKey="completion_rate"
+                stroke={BRAND_BRIGHT}
                 strokeWidth={2}
-                dot={{ fill: '#00AEFF' }}
+                dot={false}
               />
             </LineChart>
           </ResponsiveContainer>
         </div>
-
-        {/* Watch Time Analysis */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
-          <h3 className="text-lg font-semibold mb-4">Average Watch Time</h3>
-          <ResponsiveContainer width="100%" height={250}>
-            <BarChart data={stats}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-              <XAxis dataKey="date" stroke="#666" />
-              <YAxis stroke="#666" />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: '#1f2937', 
-                  border: 'none', 
-                  borderRadius: '8px',
-                  color: '#fff'
-                }}
-                formatter={(value: any) => `${value.toFixed(1)}m`}
-              />
-              <Bar dataKey="avg_watch_time" fill="#00AEFF" radius={[8, 8, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-
-      {/* Completion Rate Chart */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
-        <h3 className="text-lg font-semibold mb-4">Completion Rate Trend</h3>
-        <ResponsiveContainer width="100%" height={200}>
-          <LineChart data={stats}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-            <XAxis dataKey="date" stroke="#666" />
-            <YAxis stroke="#666" />
-            <Tooltip 
-              contentStyle={{ 
-                backgroundColor: '#1f2937', 
-                border: 'none', 
-                borderRadius: '8px',
-                color: '#fff'
-              }}
-              formatter={(value: any) => `${(value * 100).toFixed(1)}%`}
-            />
-            <Line 
-              type="monotone" 
-              dataKey="completion_rate" 
-              stroke="#10b981" 
-              strokeWidth={2}
-              dot={false}
-            />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      </Reveal>
     </div>
   );
 };
@@ -254,16 +240,16 @@ const StatCard: React.FC<{
   icon: string;
   trend?: string;
 }> = ({ title, value, icon, trend }) => (
-  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+  <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl hover:border-[#C6F833] transition-all">
     <div className="flex items-center justify-between mb-2">
-      <p className="text-sm text-gray-600 dark:text-gray-400">{title}</p>
+      <p className="text-sm text-[rgba(246,246,241,0.7)]">{title}</p>
       <span className="text-2xl">{icon}</span>
     </div>
     <div className="flex items-end justify-between">
-      <p className="text-3xl font-bold text-gray-900 dark:text-white">{value}</p>
+      <p className="font-display text-3xl text-[#C6F833]">{value}</p>
       {trend && (
-        <span className={`text-sm font-medium ${
-          trend.startsWith('+') ? 'text-green-500' : 'text-red-500'
+        <span className={`text-sm font-bold ${
+          trend.startsWith('+') ? 'text-[#C6F833]' : 'text-[#D8FF5E]'
         }`}>
           {trend}
         </span>

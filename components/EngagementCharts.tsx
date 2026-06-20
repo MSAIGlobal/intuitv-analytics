@@ -19,6 +19,19 @@ import {
   Radar
 } from 'recharts';
 import { analyticsClient } from '@/shared/api/analyticsClient';
+import Reveal from './Reveal';
+
+const BRAND = '#C6F833';
+const BRAND_BRIGHT = '#D8FF5E';
+const INK = '#0A0A0A';
+const PAPER = '#F6F6F1';
+
+const TOOLTIP_STYLE = {
+  backgroundColor: INK,
+  border: `2px solid ${BRAND}`,
+  borderRadius: '8px',
+  color: PAPER,
+};
 
 export const EngagementCharts: React.FC = () => {
   const [timeframe, setTimeframe] = useState<'24h' | '7d' | '30d'>('7d');
@@ -44,7 +57,7 @@ export const EngagementCharts: React.FC = () => {
   if (loading || !overview) {
     return (
       <div className="flex items-center justify-center h-96">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-500"></div>
+        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#C6F833]"></div>
       </div>
     );
   }
@@ -68,165 +81,133 @@ export const EngagementCharts: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Timeframe Selector */}
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Engagement Analytics
-        </h2>
-        <div className="flex gap-2">
-          {['24h', '7d', '30d'].map((tf) => (
-            <button
-              key={tf}
-              onClick={() => setTimeframe(tf as any)}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                timeframe === tf
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300'
-              }`}
-            >
-              {tf === '24h' ? '24 Hours' : tf === '7d' ? '7 Days' : '30 Days'}
-            </button>
-          ))}
+      <Reveal>
+        <div className="flex justify-between items-center">
+          <h2 className="font-display text-3xl text-[#0A0A0A]">
+            Engagement Analytics
+          </h2>
+          <div className="flex gap-2">
+            {['24h', '7d', '30d'].map((tf) => (
+              <button
+                key={tf}
+                onClick={() => setTimeframe(tf as any)}
+                className={`px-4 py-2 rounded-lg font-bold border-2 border-[#0A0A0A] transition-all hover:scale-105 ${
+                  timeframe === tf
+                    ? 'bg-[#0A0A0A] text-[#C6F833]'
+                    : 'bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E]'
+                }`}
+              >
+                {tf === '24h' ? '24 Hours' : tf === '7d' ? '7 Days' : '30 Days'}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      </Reveal>
 
       {/* Hourly Engagement Chart */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
-        <h3 className="text-lg font-semibold mb-4">Hourly Activity</h3>
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={overview.hourly_data}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-            <XAxis 
-              dataKey="hour" 
-              stroke="#666"
-              label={{ value: 'Hour', position: 'insideBottom', offset: -5 }}
-            />
-            <YAxis stroke="#666" />
-            <Tooltip 
-              contentStyle={{ 
-                backgroundColor: '#1f2937', 
-                border: 'none', 
-                borderRadius: '8px',
-                color: '#fff'
-              }}
-            />
-            <Legend />
-            <Line 
-              type="monotone" 
-              dataKey="views" 
-              stroke="#00AEFF" 
-              strokeWidth={2}
-              name="Views"
-              dot={{ fill: '#00AEFF' }}
-            />
-            <Line 
-              type="monotone" 
-              dataKey="sessions" 
-              stroke="#10B981" 
-              strokeWidth={2}
-              name="Sessions"
-              dot={{ fill: '#10B981' }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <Reveal>
+        <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+          <h3 className="font-display text-2xl text-[#C6F833] mb-4">Hourly Activity</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={overview.hourly_data}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
+              <XAxis
+                dataKey="hour"
+                stroke="rgba(246,246,241,0.6)"
+                label={{ value: 'Hour', position: 'insideBottom', offset: -5, fill: 'rgba(246,246,241,0.6)' }}
+              />
+              <YAxis stroke="rgba(246,246,241,0.6)" />
+              <Tooltip contentStyle={TOOLTIP_STYLE} />
+              <Legend />
+              <Line
+                type="monotone"
+                dataKey="views"
+                stroke={BRAND}
+                strokeWidth={2}
+                name="Views"
+                dot={{ fill: BRAND }}
+              />
+              <Line
+                type="monotone"
+                dataKey="sessions"
+                stroke={PAPER}
+                strokeWidth={2}
+                name="Sessions"
+                dot={{ fill: PAPER }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </Reveal>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Device Distribution */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
-          <h3 className="text-lg font-semibold mb-4">Viewers by Device</h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={deviceData} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-              <XAxis type="number" stroke="#666" />
-              <YAxis dataKey="device" type="category" stroke="#666" width={100} />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: '#1f2937', 
-                  border: 'none', 
-                  borderRadius: '8px',
-                  color: '#fff'
-                }}
-              />
-              <Bar dataKey="viewers" fill="#00AEFF" radius={[0, 8, 8, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+        <Reveal>
+          <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+            <h3 className="font-display text-2xl text-[#C6F833] mb-4">Viewers by Device</h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={deviceData} layout="vertical">
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
+                <XAxis type="number" stroke="rgba(246,246,241,0.6)" />
+                <YAxis dataKey="device" type="category" stroke="rgba(246,246,241,0.6)" width={100} />
+                <Tooltip cursor={{ fill: 'rgba(198,248,51,0.12)' }} contentStyle={TOOLTIP_STYLE} />
+                <Bar dataKey="viewers" fill={BRAND} radius={[0, 8, 8, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </Reveal>
 
         {/* Platform Distribution */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
-          <h3 className="text-lg font-semibold mb-4">Viewers by Platform</h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={platformData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-              <XAxis dataKey="platform" stroke="#666" angle={-45} textAnchor="end" height={100} />
-              <YAxis stroke="#666" />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: '#1f2937', 
-                  border: 'none', 
-                  borderRadius: '8px',
-                  color: '#fff'
-                }}
-              />
-              <Bar dataKey="viewers" fill="#10B981" radius={[8, 8, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+        <Reveal delay={80}>
+          <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+            <h3 className="font-display text-2xl text-[#C6F833] mb-4">Viewers by Platform</h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={platformData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
+                <XAxis dataKey="platform" stroke="rgba(246,246,241,0.6)" angle={-45} textAnchor="end" height={100} />
+                <YAxis stroke="rgba(246,246,241,0.6)" />
+                <Tooltip cursor={{ fill: 'rgba(198,248,51,0.12)' }} contentStyle={TOOLTIP_STYLE} />
+                <Bar dataKey="viewers" fill={BRAND_BRIGHT} radius={[8, 8, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </Reveal>
       </div>
 
       {/* Event Type Distribution */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
-        <h3 className="text-lg font-semibold mb-4">Event Distribution</h3>
-        <ResponsiveContainer width="100%" height={350}>
-          <RadarChart data={engagementByType}>
-            <PolarGrid stroke="#333" />
-            <PolarAngleAxis dataKey="type" stroke="#666" />
-            <PolarRadiusAxis stroke="#666" />
-            <Radar 
-              name="Events" 
-              dataKey="events" 
-              stroke="#00AEFF" 
-              fill="#00AEFF" 
-              fillOpacity={0.6} 
-            />
-            <Tooltip 
-              contentStyle={{ 
-                backgroundColor: '#1f2937', 
-                border: 'none', 
-                borderRadius: '8px',
-                color: '#fff'
-              }}
-            />
-          </RadarChart>
-        </ResponsiveContainer>
-      </div>
+      <Reveal>
+        <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+          <h3 className="font-display text-2xl text-[#C6F833] mb-4">Event Distribution</h3>
+          <ResponsiveContainer width="100%" height={350}>
+            <RadarChart data={engagementByType}>
+              <PolarGrid stroke="rgba(246,246,241,0.2)" />
+              <PolarAngleAxis dataKey="type" stroke="rgba(246,246,241,0.6)" />
+              <PolarRadiusAxis stroke="rgba(246,246,241,0.4)" />
+              <Radar
+                name="Events"
+                dataKey="events"
+                stroke={BRAND}
+                fill={BRAND}
+                fillOpacity={0.5}
+              />
+              <Tooltip contentStyle={TOOLTIP_STYLE} />
+            </RadarChart>
+          </ResponsiveContainer>
+        </div>
+      </Reveal>
 
       {/* Summary Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <MetricCard
-          title="Total Views"
-          value={overview.summary.total_views.toLocaleString()}
-          change="+12.5%"
-          positive={true}
-        />
-        <MetricCard
-          title="Unique Viewers"
-          value={overview.summary.unique_viewers.toLocaleString()}
-          change="+8.3%"
-          positive={true}
-        />
-        <MetricCard
-          title="Watch Hours"
-          value={overview.summary.total_watch_hours.toLocaleString()}
-          change="+15.7%"
-          positive={true}
-        />
-        <MetricCard
-          title="Completion Rate"
-          value={`${overview.summary.completion_rate_percentage.toFixed(1)}%`}
-          change="-2.1%"
-          positive={false}
-        />
+        {[
+          { title: 'Total Views', value: overview.summary.total_views.toLocaleString(), change: '+12.5%', positive: true },
+          { title: 'Unique Viewers', value: overview.summary.unique_viewers.toLocaleString(), change: '+8.3%', positive: true },
+          { title: 'Watch Hours', value: overview.summary.total_watch_hours.toLocaleString(), change: '+15.7%', positive: true },
+          { title: 'Completion Rate', value: `${overview.summary.completion_rate_percentage.toFixed(1)}%`, change: '-2.1%', positive: false },
+        ].map((m, i) => (
+          <Reveal key={m.title} delay={i * 70}>
+            <MetricCard title={m.title} value={m.value} change={m.change} positive={m.positive} />
+          </Reveal>
+        ))}
       </div>
     </div>
   );
@@ -238,12 +219,12 @@ const MetricCard: React.FC<{
   change: string;
   positive: boolean;
 }> = ({ title, value, change, positive }) => (
-  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
-    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">{title}</p>
+  <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl hover:border-[#C6F833] transition-all">
+    <p className="text-sm text-[rgba(246,246,241,0.7)] mb-1">{title}</p>
     <div className="flex items-baseline justify-between">
-      <p className="text-2xl font-bold text-gray-900 dark:text-white">{value}</p>
-      <span className={`text-sm font-medium ${
-        positive ? 'text-green-500' : 'text-red-500'
+      <p className="font-display text-2xl text-[#C6F833]">{value}</p>
+      <span className={`text-sm font-bold ${
+        positive ? 'text-[#C6F833]' : 'text-[#D8FF5E]'
       }`}>
         {change}
       </span>

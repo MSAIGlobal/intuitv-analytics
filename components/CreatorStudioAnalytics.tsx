@@ -43,31 +43,31 @@ export default function CreatorStudioAnalytics({ filters, refreshKey }: CreatorS
   };
 
   return (
-    <div className="bg-gradient-to-br from-slate-800/80 to-slate-800/50 backdrop-blur-sm border border-blue-700/30 rounded-xl p-6 shadow-xl">
+    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-white mb-1">
+          <h2 className="font-display text-2xl font-bold text-[#C6F833] mb-1">
             {view === 'creators' ? 'Creator' : 'Studio'} Analytics
           </h2>
-          <p className="text-blue-300">Performance by creator and studio</p>
+          <p className="text-[rgba(246,246,241,0.7)]">Performance by creator and studio</p>
         </div>
         <div className="flex gap-2">
           <button
             onClick={() => setView('creators')}
-            className={`px-4 py-2 rounded-lg transition-all ${
+            className={`px-4 py-2 rounded-lg border-2 border-[#0A0A0A] transition-all ${
               view === 'creators'
-                ? 'bg-blue-600 text-white'
-                : 'bg-slate-700 text-blue-300 hover:bg-slate-600'
+                ? 'bg-[#0A0A0A] text-[#C6F833]'
+                : 'bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E]'
             }`}
           >
             Creators
           </button>
           <button
             onClick={() => setView('studios')}
-            className={`px-4 py-2 rounded-lg transition-all ${
+            className={`px-4 py-2 rounded-lg border-2 border-[#0A0A0A] transition-all ${
               view === 'studios'
-                ? 'bg-blue-600 text-white'
-                : 'bg-slate-700 text-blue-300 hover:bg-slate-600'
+                ? 'bg-[#0A0A0A] text-[#C6F833]'
+                : 'bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E]'
             }`}
           >
             Studios
@@ -78,7 +78,7 @@ export default function CreatorStudioAnalytics({ filters, refreshKey }: CreatorS
       {loading ? (
         <div className="space-y-4">
           {[...Array(10)].map((_, i) => (
-            <div key={i} className="h-24 bg-slate-700/50 rounded-lg animate-pulse"></div>
+            <div key={i} className="h-24 bg-[rgba(198,248,51,0.12)] rounded-lg animate-pulse"></div>
           ))}
         </div>
       ) : view === 'creators' ? (
@@ -86,37 +86,37 @@ export default function CreatorStudioAnalytics({ filters, refreshKey }: CreatorS
           {creators.map((creator, index) => (
             <div
               key={creator.creatorId}
-              className="p-4 bg-slate-700/30 rounded-lg hover:bg-slate-700/50 transition-all"
+              className="p-4 bg-[rgba(198,248,51,0.12)] rounded-lg hover:bg-[rgba(198,248,51,0.2)] transition-all"
             >
               <div className="flex items-start gap-4">
                 {/* Rank */}
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-cyan-600 text-white flex items-center justify-center font-bold">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#C6F833] text-[#0A0A0A] flex items-center justify-center font-bold">
                   {index + 1}
                 </div>
 
                 {/* Creator Info */}
                 <div className="flex-1 min-w-0">
-                  <div className="text-white font-semibold text-lg mb-1">
+                  <div className="text-[#F6F6F1] font-semibold text-lg mb-1">
                     {creator.creatorName}
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                     <div>
-                      <div className="text-blue-300">Views</div>
-                      <div className="text-white font-semibold">
+                      <div className="text-[rgba(246,246,241,0.7)]">Views</div>
+                      <div className="text-[#F6F6F1] font-semibold">
                         {formatNumber(creator.views)}
                       </div>
                     </div>
                     <div>
-                      <div className="text-blue-300">Watch Time</div>
-                      <div className="text-white font-semibold">
+                      <div className="text-[rgba(246,246,241,0.7)]">Watch Time</div>
+                      <div className="text-[#F6F6F1] font-semibold">
                         {formatNumber(creator.watchTime)}h
                       </div>
                     </div>
                     <div>
-                      <div className="text-blue-300">Growth</div>
+                      <div className="text-[rgba(246,246,241,0.7)]">Growth</div>
                       <div
                         className={`font-semibold ${
-                          creator.channelGrowth >= 0 ? 'text-green-400' : 'text-red-400'
+                          creator.channelGrowth >= 0 ? 'text-[#C6F833]' : 'text-[#F6F6F1]'
                         }`}
                       >
                         {creator.channelGrowth >= 0 ? '+' : ''}
@@ -124,8 +124,8 @@ export default function CreatorStudioAnalytics({ filters, refreshKey }: CreatorS
                       </div>
                     </div>
                     <div>
-                      <div className="text-blue-300">Performance</div>
-                      <div className="text-white font-semibold">
+                      <div className="text-[rgba(246,246,241,0.7)]">Performance</div>
+                      <div className="text-[#F6F6F1] font-semibold">
                         {creator.avgPerformance}%
                       </div>
                     </div>
@@ -134,16 +134,16 @@ export default function CreatorStudioAnalytics({ filters, refreshKey }: CreatorS
                   {/* AI vs Uploaded Content */}
                   <div className="mt-3 flex items-center gap-4 text-sm">
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-purple-500"></div>
-                      <span className="text-blue-300">AI Generated:</span>
-                      <span className="text-white font-semibold">
+                      <div className="w-3 h-3 rounded-full bg-[#C6F833]"></div>
+                      <span className="text-[rgba(246,246,241,0.7)]">AI Generated:</span>
+                      <span className="text-[#F6F6F1] font-semibold">
                         {creator.aiGeneratedContent}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-cyan-500"></div>
-                      <span className="text-blue-300">Uploaded:</span>
-                      <span className="text-white font-semibold">
+                      <div className="w-3 h-3 rounded-full bg-[#D8FF5E]"></div>
+                      <span className="text-[rgba(246,246,241,0.7)]">Uploaded:</span>
+                      <span className="text-[#F6F6F1] font-semibold">
                         {creator.uploadedContent}
                       </span>
                     </div>
@@ -158,45 +158,45 @@ export default function CreatorStudioAnalytics({ filters, refreshKey }: CreatorS
           {studios.map((studio, index) => (
             <div
               key={studio.studioId}
-              className="p-4 bg-slate-700/30 rounded-lg hover:bg-slate-700/50 transition-all"
+              className="p-4 bg-[rgba(198,248,51,0.12)] rounded-lg hover:bg-[rgba(198,248,51,0.2)] transition-all"
             >
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 text-white flex items-center justify-center font-bold">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#9BD600] text-[#0A0A0A] flex items-center justify-center font-bold">
                   {index + 1}
                 </div>
 
                 <div className="flex-1">
-                  <div className="text-white font-semibold text-lg mb-2">
+                  <div className="text-[#F6F6F1] font-semibold text-lg mb-2">
                     {studio.studioName}
                   </div>
                   <div className="grid grid-cols-3 gap-4 text-sm mb-3">
                     <div>
-                      <div className="text-blue-300">Views</div>
-                      <div className="text-white font-semibold">
+                      <div className="text-[rgba(246,246,241,0.7)]">Views</div>
+                      <div className="text-[#F6F6F1] font-semibold">
                         {formatNumber(studio.views)}
                       </div>
                     </div>
                     <div>
-                      <div className="text-blue-300">Watch Time</div>
-                      <div className="text-white font-semibold">
+                      <div className="text-[rgba(246,246,241,0.7)]">Watch Time</div>
+                      <div className="text-[#F6F6F1] font-semibold">
                         {formatNumber(studio.watchTime)}h
                       </div>
                     </div>
                     <div>
-                      <div className="text-blue-300">Channels</div>
-                      <div className="text-white font-semibold">{studio.channels}</div>
+                      <div className="text-[rgba(246,246,241,0.7)]">Channels</div>
+                      <div className="text-[#F6F6F1] font-semibold">{studio.channels}</div>
                     </div>
                   </div>
 
                   {/* Top Channels */}
                   {studio.topChannels && studio.topChannels.length > 0 && (
                     <div className="text-sm">
-                      <div className="text-blue-300 mb-1">Top Channels:</div>
+                      <div className="text-[rgba(246,246,241,0.7)] mb-1">Top Channels:</div>
                       <div className="flex flex-wrap gap-2">
                         {studio.topChannels.slice(0, 3).map((channel) => (
                           <span
                             key={channel.channelId}
-                            className="px-3 py-1 bg-slate-600/50 rounded-full text-white"
+                            className="px-3 py-1 bg-[rgba(246,246,241,0.2)] rounded-full text-[#F6F6F1]"
                           >
                             {channel.channelName}
                           </span>
