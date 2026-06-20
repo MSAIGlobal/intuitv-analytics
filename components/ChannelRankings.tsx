@@ -37,29 +37,29 @@ export default function ChannelRankings({ filters, refreshKey }: ChannelRankings
   };
 
   return (
-    <div className="bg-gradient-to-br from-slate-800/80 to-slate-800/50 backdrop-blur-sm border border-blue-700/30 rounded-xl p-6 shadow-xl">
+    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-white mb-1">Top Channels</h2>
-          <p className="text-blue-300">By watch time and views</p>
+          <h2 className="font-display text-2xl font-bold text-[#C6F833] mb-1">Top Channels</h2>
+          <p className="text-[rgba(246,246,241,0.7)]">By watch time and views</p>
         </div>
         <div className="flex gap-2">
           <button
             onClick={() => setMetric('watchTime')}
-            className={`px-4 py-2 rounded-lg transition-all ${
+            className={`px-4 py-2 rounded-lg border-2 border-[#0A0A0A] transition-all ${
               metric === 'watchTime'
-                ? 'bg-blue-600 text-white'
-                : 'bg-slate-700 text-blue-300 hover:bg-slate-600'
+                ? 'bg-[#0A0A0A] text-[#C6F833]'
+                : 'bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E]'
             }`}
           >
             Watch Time
           </button>
           <button
             onClick={() => setMetric('views')}
-            className={`px-4 py-2 rounded-lg transition-all ${
+            className={`px-4 py-2 rounded-lg border-2 border-[#0A0A0A] transition-all ${
               metric === 'views'
-                ? 'bg-blue-600 text-white'
-                : 'bg-slate-700 text-blue-300 hover:bg-slate-600'
+                ? 'bg-[#0A0A0A] text-[#C6F833]'
+                : 'bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E]'
             }`}
           >
             Views
@@ -70,7 +70,7 @@ export default function ChannelRankings({ filters, refreshKey }: ChannelRankings
       {loading ? (
         <div className="space-y-4">
           {[...Array(10)].map((_, i) => (
-            <div key={i} className="h-16 bg-slate-700/50 rounded-lg animate-pulse"></div>
+            <div key={i} className="h-16 bg-[rgba(198,248,51,0.12)] rounded-lg animate-pulse"></div>
           ))}
         </div>
       ) : (
@@ -78,18 +78,18 @@ export default function ChannelRankings({ filters, refreshKey }: ChannelRankings
           {rankings.map((channel, index) => (
             <div
               key={channel.channelId}
-              className="flex items-center gap-4 p-4 bg-slate-700/30 rounded-lg hover:bg-slate-700/50 transition-all group"
+              className="flex items-center gap-4 p-4 bg-[rgba(198,248,51,0.12)] rounded-lg hover:bg-[rgba(198,248,51,0.2)] transition-all group"
             >
               {/* Rank */}
               <div
                 className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold ${
                   index === 0
-                    ? 'bg-yellow-500 text-yellow-900'
+                    ? 'bg-[#C6F833] text-[#0A0A0A]'
                     : index === 1
-                    ? 'bg-slate-400 text-slate-900'
+                    ? 'bg-[#D8FF5E] text-[#0A0A0A]'
                     : index === 2
-                    ? 'bg-amber-600 text-amber-900'
-                    : 'bg-slate-600 text-slate-200'
+                    ? 'bg-[#9BD600] text-[#0A0A0A]'
+                    : 'bg-[rgba(246,246,241,0.2)] text-[#F6F6F1]'
                 }`}
               >
                 {index + 1}
@@ -97,30 +97,30 @@ export default function ChannelRankings({ filters, refreshKey }: ChannelRankings
 
               {/* Channel Info */}
               <div className="flex-1 min-w-0">
-                <div className="text-white font-semibold truncate group-hover:text-blue-400 transition-colors">
+                <div className="text-[#F6F6F1] font-semibold truncate group-hover:text-[#C6F833] transition-colors">
                   {channel.channelName}
                 </div>
                 {channel.creatorName && (
-                  <div className="text-sm text-blue-300">{channel.creatorName}</div>
+                  <div className="text-sm text-[rgba(246,246,241,0.7)]">{channel.creatorName}</div>
                 )}
               </div>
 
               {/* Metrics */}
               <div className="flex items-center gap-6">
                 <div className="text-right">
-                  <div className="text-white font-bold">
+                  <div className="text-[#F6F6F1] font-bold">
                     {formatNumber(metric === 'watchTime' ? channel.watchTime : channel.views)}
                   </div>
-                  <div className="text-xs text-blue-300">
+                  <div className="text-xs text-[rgba(246,246,241,0.7)]">
                     {metric === 'watchTime' ? 'hours' : 'views'}
                   </div>
                 </div>
 
                 {/* Progress Bar */}
                 <div className="w-32">
-                  <div className="h-2 bg-slate-600 rounded-full overflow-hidden">
+                  <div className="h-2 bg-[rgba(246,246,241,0.2)] rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-blue-500 to-cyan-500"
+                      className="h-full bg-[#C6F833]"
                       style={{
                         width: `${
                           ((metric === 'watchTime' ? channel.watchTime : channel.views) /

@@ -28,6 +28,22 @@ import {
   Bell
 } from 'lucide-react'
 import Image from 'next/image'
+import Reveal from '../components/Reveal'
+
+/* ============================================================================
+   BRAND PALETTE — IntuiTV "BUILT DIFFERENT"
+============================================================================ */
+
+const BRAND = '#C6F833'        // neon lime
+const BRAND_BRIGHT = '#D8FF5E' // lime bright
+const BRAND_DEEP = '#9BD600'   // lime deep
+const INK = '#0A0A0A'          // chunky black
+const PAPER = '#F6F6F1'        // off-white
+const INK_SOFT = '#3A3A33'     // muted ink for secondary text on lime
+const LIME_FILL = 'rgba(198,248,51,0.12)' // subtle lime fill on black
+
+// Categorical accents for charts/legends — kept legible on ink surfaces
+const ACCENTS = [BRAND, BRAND_BRIGHT, PAPER, BRAND_DEEP, '#7AAB00', '#EAFFB0']
 
 /* ============================================================================
    TYPES
@@ -296,31 +312,31 @@ export default function AnalyticsDashboard() {
 
   if (loading && !overview.totalViews) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#0A0F1E' }}>
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: BRAND }}>
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-t-transparent rounded-full animate-spin mx-auto mb-4" 
-               style={{ borderColor: '#00D9FF', borderTopColor: 'transparent' }} />
-          <p style={{ color: '#A8B2C8' }}>Loading analytics from API...</p>
+          <div className="w-16 h-16 border-4 rounded-full animate-spin mx-auto mb-4"
+               style={{ borderColor: INK, borderTopColor: 'transparent' }} />
+          <p className="font-display text-2xl" style={{ color: INK }}>Loading analytics…</p>
         </div>
       </div>
     )
   }
 
 return (
-  <div className="min-h-screen" style={{ backgroundColor: '#0A0F1E' }}>
+  <div className="min-h-screen" style={{ backgroundColor: BRAND }}>
     {/* Header */}
     <header
-      className="sticky top-0 z-50 border-b"
-      style={{ backgroundColor: '#121A2E', borderColor: '#1E293B' }}
+      className="sticky top-0 z-50 border-b-4"
+      style={{ backgroundColor: BRAND, borderColor: INK }}
     >
       <div className="max-w-[1920px] mx-auto px-6 py-4 flex items-center justify-between">
-        
+
         {/* Left: Logo + Title (clickable) */}
         <a
           href="https://mother.mediastreamai.com"
-          className="flex items-center gap-4 transition-opacity hover:opacity-80"
+          className="flex items-center gap-4 transition-transform hover:scale-[1.02]"
         >
-          <div className="relative w-10 h-10 shrink-0">
+          <div className="relative w-10 h-10 shrink-0 rounded-lg overflow-hidden border-2" style={{ borderColor: INK, backgroundColor: INK }}>
             <Image
               src="/logo_icon.png"
               alt="MOTHER"
@@ -330,9 +346,9 @@ return (
             />
           </div>
 
-          <div className="h-8 w-px" style={{ backgroundColor: '#1E293B' }} />
+          <div className="h-8 w-1" style={{ backgroundColor: INK }} />
 
-          <h1 className="text-xl font-semibold text-white whitespace-nowrap">
+          <h1 className="font-display text-2xl md:text-3xl whitespace-nowrap" style={{ color: INK }}>
             Analytics Dashboard
           </h1>
         </a>
@@ -340,37 +356,38 @@ return (
           {/* Right: Search + Actions */}
           <div className="flex items-center gap-3">
             <div className="relative">
-              <Search 
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" 
-                style={{ color: '#6B7A99' }}
+              <Search
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4"
+                style={{ color: INK_SOFT }}
               />
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search metrics..."
-                className="pl-10 pr-4 py-2 rounded-lg text-sm transition-all focus:outline-none focus:ring-2"
+                className="pl-10 pr-4 py-2 rounded-lg text-sm font-medium transition-all focus:outline-none focus:ring-2"
                 style={{
-                  backgroundColor: '#0A0F1E',
-                  borderWidth: '1px',
-                  borderColor: '#1E293B',
-                  color: '#FFFFFF',
+                  backgroundColor: PAPER,
+                  borderWidth: '2px',
+                  borderColor: INK,
+                  color: INK,
                   width: '280px',
                 }}
               />
             </div>
 
-            <button 
-              className="relative p-2 rounded-lg transition-colors hover:bg-opacity-70"
-              style={{ backgroundColor: '#1A2640' }}
+            <button
+              className="relative p-2 rounded-lg border-2 transition-all hover:scale-105"
+              style={{ backgroundColor: INK, borderColor: INK, color: BRAND }}
             >
-              <Bell className="w-5 h-5" style={{ color: '#A8B2C8' }} />
+              <Bell className="w-5 h-5" style={{ color: BRAND }} />
               {errorMetrics.critical > 0 && (
-                <span 
-                  className="absolute -top-1 -right-1 w-5 h-5 rounded-full text-xs font-semibold flex items-center justify-center"
-                  style={{ 
-                    backgroundColor: '#EF4444',
-                    color: '#FFFFFF',
+                <span
+                  className="absolute -top-1 -right-1 w-5 h-5 rounded-full text-xs font-bold flex items-center justify-center border-2"
+                  style={{
+                    backgroundColor: BRAND_BRIGHT,
+                    color: INK,
+                    borderColor: INK,
                   }}
                 >
                   {errorMetrics.critical}
@@ -381,95 +398,96 @@ return (
             <button
               onClick={handleRefresh}
               disabled={refreshing}
-              className="p-2 rounded-lg transition-all hover:bg-opacity-70 disabled:opacity-50"
-              style={{ backgroundColor: '#1A2640' }}
+              className="p-2 rounded-lg border-2 transition-all hover:scale-105 disabled:opacity-50"
+              style={{ backgroundColor: INK, borderColor: INK, color: BRAND }}
             >
               <RefreshCw
                 className={`w-5 h-5 ${refreshing ? 'animate-spin' : ''}`}
-                style={{ color: '#A8B2C8' }}
+                style={{ color: BRAND }}
               />
             </button>
           </div>
         </div>
       </header>
 
+      {/* Marquee banner */}
+      <div className="overflow-hidden border-b-4" style={{ backgroundColor: INK, borderColor: INK }}>
+        <div className="marquee-track py-2">
+          {Array.from({ length: 2 }).map((_, i) => (
+            <span key={i} className="font-display text-lg md:text-xl px-4" style={{ color: BRAND }} aria-hidden={i === 1}>
+              BUILT DIFFERENT&nbsp;•&nbsp;INTUITV&nbsp;•&nbsp;BUILT DIFFERENT&nbsp;•&nbsp;INTUITV&nbsp;•&nbsp;BUILT DIFFERENT&nbsp;•&nbsp;INTUITV&nbsp;•&nbsp;
+            </span>
+          ))}
+        </div>
+      </div>
+
       {error && (
         <div className="max-w-[1920px] mx-auto px-6 py-4">
-          <div className="p-4 rounded-lg flex items-center gap-3" style={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', border: '1px solid #EF4444' }}>
-            <AlertCircle className="w-5 h-5" style={{ color: '#EF4444' }} />
-            <span style={{ color: '#EF4444' }}>{error}</span>
+          <div className="p-4 rounded-lg flex items-center gap-3 border-2" style={{ backgroundColor: INK, borderColor: INK }}>
+            <AlertCircle className="w-5 h-5" style={{ color: BRAND_BRIGHT }} />
+            <span className="font-semibold" style={{ color: PAPER }}>{error}</span>
           </div>
         </div>
       )}
 
-      {/* Timeframe Selector */}
-      <div className="max-w-[1920px] mx-auto px-6 py-4">
-        <div className="flex gap-2">
-          {['24h', '7d', '30d', '90d'].map((tf) => (
-            <button
-              key={tf}
-              onClick={() => setTimeframe(tf)}
-              className="px-4 py-2 rounded-lg text-sm font-medium transition-all"
-              style={{
-                backgroundColor: timeframe === tf ? '#00D9FF' : '#1A2640',
-                color: timeframe === tf ? '#0A0F1E' : '#A8B2C8',
-              }}
-            >
-              {tf === '24h' ? 'Last 24 Hours' : tf === '7d' ? 'Last 7 Days' : tf === '30d' ? 'Last 30 Days' : 'Last 90 Days'}
-            </button>
-          ))}
-        </div>
+      {/* Title + Timeframe Selector */}
+      <div className="max-w-[1920px] mx-auto px-6 pt-8 pb-4">
+        <Reveal>
+          <h2 className="font-display text-5xl md:text-7xl mb-6" style={{ color: INK }}>
+            Built Different.<br />The Numbers Prove It.
+          </h2>
+        </Reveal>
+        <Reveal delay={80}>
+          <div className="flex flex-wrap gap-2">
+            {['24h', '7d', '30d', '90d'].map((tf) => (
+              <button
+                key={tf}
+                onClick={() => setTimeframe(tf)}
+                className="px-4 py-2 rounded-lg text-sm font-bold border-2 transition-all hover:scale-105"
+                style={{
+                  backgroundColor: timeframe === tf ? INK : BRAND,
+                  color: timeframe === tf ? BRAND : INK,
+                  borderColor: INK,
+                }}
+              >
+                {tf === '24h' ? 'Last 24 Hours' : tf === '7d' ? 'Last 7 Days' : tf === '30d' ? 'Last 30 Days' : 'Last 90 Days'}
+              </button>
+            ))}
+          </div>
+        </Reveal>
       </div>
 
       <main className="max-w-[1920px] mx-auto px-6 pb-8">
         {/* KPI Cards Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
-          <KPICard
-            title="Total Views"
-            value={overview.totalViews}
-            icon={<Eye />}
-            trend={overview.viewsTrend}
-            color="#00D9FF"
-          />
-          <KPICard
-            title="Unique Viewers"
-            value={overview.uniqueViewers}
-            icon={<Users />}
-            trend={overview.viewersTrend}
-            color="#10B981"
-          />
-          <KPICard
-            title="Watch Hours"
-            value={overview.totalWatchHours}
-            icon={<Clock />}
-            format="hours"
-            trend={overview.watchHoursTrend}
-            color="#F59E0B"
-          />
-          <KPICard
-            title="Avg Session"
-            value={overview.avgSessionDuration}
-            icon={<Play />}
-            format="minutes"
-            color="#8B5CF6"
-          />
-          <KPICard
-            title="Live Now"
-            value={overview.concurrentStreams}
-            icon={<Play />}
-            color="#EF4444"
-            pulse
-          />
+          {[
+            { title: 'Total Views', value: overview.totalViews, icon: <Eye />, trend: overview.viewsTrend },
+            { title: 'Unique Viewers', value: overview.uniqueViewers, icon: <Users />, trend: overview.viewersTrend },
+            { title: 'Watch Hours', value: overview.totalWatchHours, icon: <Clock />, format: 'hours' as const, trend: overview.watchHoursTrend },
+            { title: 'Avg Session', value: overview.avgSessionDuration, icon: <Play />, format: 'minutes' as const },
+            { title: 'Live Now', value: overview.concurrentStreams, icon: <Play />, pulse: true },
+          ].map((k, i) => (
+            <Reveal key={k.title} delay={i * 70}>
+              <KPICard
+                title={k.title}
+                value={k.value}
+                icon={k.icon}
+                format={k.format}
+                trend={k.trend}
+                pulse={k.pulse}
+              />
+            </Reveal>
+          ))}
         </div>
 
         {/* Main Charts Grid */}
         <div className="grid grid-cols-12 gap-6 mb-6">
           {/* Time Series Chart - Full Width */}
-          <div className="col-span-12">
+          <Reveal className="col-span-12">
             <ChartCard title="Viewership Over Time">
               {timeSeries.length === 0 ? (
-                <div className="h-[300px] flex flex-col items-center justify-center" style={{ color: '#6B7A99' }}>
-                  <Eye className="w-12 h-12 mb-3" style={{ color: '#1A2640' }} />
+                <div className="h-[300px] flex flex-col items-center justify-center" style={{ color: 'rgba(246,246,241,0.6)' }}>
+                  <Eye className="w-12 h-12 mb-3" style={{ color: BRAND_DEEP }} />
                   <p>No viewership data available yet</p>
                   <p className="text-sm mt-1">Data will appear as viewers start watching content</p>
                 </div>
@@ -478,49 +496,51 @@ return (
                   <AreaChart data={timeSeries}>
                     <defs>
                       <linearGradient id="colorViews" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#00D9FF" stopOpacity={0.3}/>
-                        <stop offset="95%" stopColor="#00D9FF" stopOpacity={0}/>
+                        <stop offset="5%" stopColor={BRAND} stopOpacity={0.45}/>
+                        <stop offset="95%" stopColor={BRAND} stopOpacity={0}/>
                       </linearGradient>
                       <linearGradient id="colorUniques" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#10B981" stopOpacity={0.3}/>
-                        <stop offset="95%" stopColor="#10B981" stopOpacity={0}/>
+                        <stop offset="5%" stopColor={PAPER} stopOpacity={0.35}/>
+                        <stop offset="95%" stopColor={PAPER} stopOpacity={0}/>
                       </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
-                    <XAxis 
-                      dataKey="timestamp" 
-                      stroke="#6B7A99"
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
+                    <XAxis
+                      dataKey="timestamp"
+                      stroke="rgba(246,246,241,0.6)"
                       tickFormatter={(value) => {
                         const date = new Date(value)
-                        return timeframe === '24h' 
+                        return timeframe === '24h'
                           ? date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
                           : date.toLocaleDateString([], { month: 'short', day: 'numeric' })
                       }}
                     />
-                    <YAxis stroke="#6B7A99" />
-                    <Tooltip 
-                      contentStyle={{ 
-                        backgroundColor: '#121A2E', 
-                        border: '1px solid #1E293B',
+                    <YAxis stroke="rgba(246,246,241,0.6)" />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: INK,
+                        border: `2px solid ${BRAND}`,
                         borderRadius: '8px',
-                        color: '#FFFFFF'
+                        color: PAPER,
                       }}
                       labelFormatter={(value) => new Date(value).toLocaleString()}
                     />
                     <Legend />
-                    <Area 
-                      type="monotone" 
-                      dataKey="views" 
-                      stroke="#00D9FF" 
-                      fillOpacity={1} 
+                    <Area
+                      type="monotone"
+                      dataKey="views"
+                      stroke={BRAND}
+                      strokeWidth={2}
+                      fillOpacity={1}
                       fill="url(#colorViews)"
                       name="Total Views"
                     />
-                    <Area 
-                      type="monotone" 
-                      dataKey="uniques" 
-                      stroke="#10B981" 
-                      fillOpacity={1} 
+                    <Area
+                      type="monotone"
+                      dataKey="uniques"
+                      stroke={PAPER}
+                      strokeWidth={2}
+                      fillOpacity={1}
                       fill="url(#colorUniques)"
                       name="Unique Viewers"
                     />
@@ -528,65 +548,66 @@ return (
                 </ResponsiveContainer>
               )}
             </ChartCard>
-          </div>
+          </Reveal>
 
           {/* Platform Breakdown */}
-          <div className="col-span-12 lg:col-span-6">
+          <Reveal className="col-span-12 lg:col-span-6" delay={80}>
             <ChartCard title="Platform Distribution">
               {platformData.length === 0 ? (
-                <div className="h-[300px] flex flex-col items-center justify-center" style={{ color: '#6B7A99' }}>
-                  <Eye className="w-12 h-12 mb-3" style={{ color: '#1A2640' }} />
+                <div className="h-[300px] flex flex-col items-center justify-center" style={{ color: 'rgba(246,246,241,0.6)' }}>
+                  <Eye className="w-12 h-12 mb-3" style={{ color: BRAND_DEEP }} />
                   <p>No platform data available yet</p>
                 </div>
               ) : (
                 <ResponsiveContainer width="100%" height={300}>
                   <BarChart data={platformData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
-                    <XAxis dataKey="platform" stroke="#6B7A99" />
-                    <YAxis stroke="#6B7A99" />
-                    <Tooltip 
-                      contentStyle={{ 
-                        backgroundColor: '#121A2E', 
-                        border: '1px solid #1E293B',
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
+                    <XAxis dataKey="platform" stroke="rgba(246,246,241,0.6)" />
+                    <YAxis stroke="rgba(246,246,241,0.6)" />
+                    <Tooltip
+                      cursor={{ fill: LIME_FILL }}
+                      contentStyle={{
+                        backgroundColor: INK,
+                        border: `2px solid ${BRAND}`,
                         borderRadius: '8px',
-                        color: '#FFFFFF'
+                        color: PAPER,
                       }}
                     />
-                    <Bar dataKey="count" fill="#00D9FF" radius={[8, 8, 0, 0]} />
+                    <Bar dataKey="count" fill={BRAND} radius={[8, 8, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               )}
             </ChartCard>
-          </div>
+          </Reveal>
 
           {/* Geographic Distribution */}
-          <div className="col-span-12 lg:col-span-6">
+          <Reveal className="col-span-12 lg:col-span-6" delay={160}>
             <ChartCard title="Top Countries">
               <div className="space-y-3">
                 {geoData.length === 0 ? (
-                  <div className="h-[300px] flex flex-col items-center justify-center" style={{ color: '#6B7A99' }}>
-                    <Globe className="w-12 h-12 mb-3" style={{ color: '#1A2640' }} />
+                  <div className="h-[300px] flex flex-col items-center justify-center" style={{ color: 'rgba(246,246,241,0.6)' }}>
+                    <Globe className="w-12 h-12 mb-3" style={{ color: BRAND_DEEP }} />
                     <p>No geographic data available yet</p>
                     <p className="text-sm mt-1">Location data will appear as viewers watch</p>
                   </div>
                 ) : (
                   geoData.map((country, index) => (
                     <div key={country.country} className="flex items-center gap-3">
-                      <div className="w-8 text-right font-semibold" style={{ color: '#6B7A99' }}>
+                      <div className="w-8 text-right font-display text-lg" style={{ color: BRAND }}>
                         #{index + 1}
                       </div>
-                      <Globe className="w-4 h-4" style={{ color: '#00D9FF' }} />
+                      <Globe className="w-4 h-4" style={{ color: BRAND }} />
                       <div className="flex-1">
                         <div className="flex justify-between mb-1">
-                          <span style={{ color: '#FFFFFF' }}>{country.country}</span>
-                          <span style={{ color: '#A8B2C8' }}>{formatNumber(country.count)} views</span>
+                          <span style={{ color: PAPER }}>{country.country}</span>
+                          <span style={{ color: 'rgba(246,246,241,0.7)' }}>{formatNumber(country.count)} views</span>
                         </div>
-                        <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: '#1A2640' }}>
-                          <div 
+                        <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: 'rgba(246,246,241,0.15)' }}>
+                          <div
                             className="h-full rounded-full transition-all duration-500"
-                            style={{ 
+                            style={{
                               width: `${country.percentage}%`,
-                              backgroundColor: '#00D9FF'
+                              backgroundColor: BRAND,
                             }}
                           />
                         </div>
@@ -596,144 +617,90 @@ return (
                 )}
               </div>
             </ChartCard>
-          </div>
+          </Reveal>
 
           {/* Content Creation Stats */}
-          <div className="col-span-12 lg:col-span-4">
+          <Reveal className="col-span-12 lg:col-span-4" delay={80}>
             <ChartCard title="AI Content Generation">
               <div className="space-y-4">
-                <StatRow 
-                  label="Total Created" 
-                  value={creationStats.totalCreated} 
-                  color="#00D9FF"
-                />
-                <StatRow 
-                  label="AI Generated" 
-                  value={creationStats.aiGenerated} 
-                  color="#10B981"
-                />
-                <StatRow 
-                  label="Scripts" 
-                  value={creationStats.scriptCount} 
-                  color="#8B5CF6"
-                />
-                <StatRow 
-                  label="Images" 
-                  value={creationStats.imageCount} 
-                  color="#F59E0B"
-                />
-                <StatRow 
-                  label="Videos" 
-                  value={creationStats.videoCount} 
-                  color="#EF4444"
-                />
-                <StatRow 
-                  label="Audio" 
-                  value={creationStats.audioCount} 
-                  color="#EC4899"
-                />
-                <div className="pt-3 mt-3 border-t" style={{ borderColor: '#1E293B' }}>
+                <StatRow label="Total Created" value={creationStats.totalCreated} color={ACCENTS[0]} />
+                <StatRow label="AI Generated" value={creationStats.aiGenerated} color={ACCENTS[1]} />
+                <StatRow label="Scripts" value={creationStats.scriptCount} color={ACCENTS[2]} />
+                <StatRow label="Images" value={creationStats.imageCount} color={ACCENTS[3]} />
+                <StatRow label="Videos" value={creationStats.videoCount} color={ACCENTS[4]} />
+                <StatRow label="Audio" value={creationStats.audioCount} color={ACCENTS[5]} />
+                <div className="pt-3 mt-3 border-t-2" style={{ borderColor: 'rgba(246,246,241,0.2)' }}>
                   <div className="flex justify-between items-center">
-                    <span style={{ color: '#A8B2C8' }} className="text-sm">Avg Generation Time</span>
-                    <span style={{ color: '#FFFFFF' }} className="font-semibold">
+                    <span style={{ color: 'rgba(246,246,241,0.7)' }} className="text-sm">Avg Generation Time</span>
+                    <span style={{ color: PAPER }} className="font-semibold">
                       {creationStats.avgGenerationTime.toFixed(1)}s
                     </span>
                   </div>
                 </div>
               </div>
             </ChartCard>
-          </div>
+          </Reveal>
 
           {/* GPU Metrics */}
-          <div className="col-span-12 lg:col-span-4">
+          <Reveal className="col-span-12 lg:col-span-4" delay={160}>
             <ChartCard title="GPU Performance">
               <div className="space-y-4">
-                <MetricGauge 
-                  label="Utilization" 
-                  value={gpuMetrics.utilization} 
-                  max={100}
-                  unit="%"
-                  color="#00D9FF"
-                />
-                <MetricGauge 
-                  label="Memory" 
-                  value={gpuMetrics.memoryUsed} 
-                  max={gpuMetrics.memoryTotal}
-                  unit="GB"
-                  color="#10B981"
-                />
-                <MetricGauge 
-                  label="Temperature" 
-                  value={gpuMetrics.temperature} 
+                <MetricGauge label="Utilization" value={gpuMetrics.utilization} max={100} unit="%" color={BRAND} />
+                <MetricGauge label="Memory" value={gpuMetrics.memoryUsed} max={gpuMetrics.memoryTotal} unit="GB" color={BRAND_BRIGHT} />
+                <MetricGauge
+                  label="Temperature"
+                  value={gpuMetrics.temperature}
                   max={90}
                   unit="°C"
-                  color={gpuMetrics.temperature > 80 ? "#EF4444" : "#F59E0B"}
+                  color={gpuMetrics.temperature > 80 ? BRAND_BRIGHT : BRAND}
                 />
-                <MetricGauge 
-                  label="Power Usage" 
-                  value={gpuMetrics.powerUsage} 
-                  max={700}
-                  unit="W"
-                  color="#8B5CF6"
-                />
-                <div className="pt-3 mt-3 border-t" style={{ borderColor: '#1E293B' }}>
+                <MetricGauge label="Power Usage" value={gpuMetrics.powerUsage} max={700} unit="W" color={BRAND_DEEP} />
+                <div className="pt-3 mt-3 border-t-2" style={{ borderColor: 'rgba(246,246,241,0.2)' }}>
                   <div className="flex justify-between items-center">
-                    <span style={{ color: '#A8B2C8' }} className="text-sm">Active Jobs</span>
-                    <span style={{ color: '#FFFFFF' }} className="font-semibold text-2xl">
+                    <span style={{ color: 'rgba(246,246,241,0.7)' }} className="text-sm">Active Jobs</span>
+                    <span style={{ color: BRAND }} className="font-display text-3xl">
                       {gpuMetrics.activeJobs}
                     </span>
                   </div>
                 </div>
               </div>
             </ChartCard>
-          </div>
+          </Reveal>
 
           {/* System Health */}
-          <div className="col-span-12 lg:col-span-4">
+          <Reveal className="col-span-12 lg:col-span-4" delay={240}>
             <ChartCard title="System Health">
               <div className="space-y-4">
                 <div className="grid grid-cols-3 gap-3">
-                  <HealthBadge 
-                    label="Total" 
-                    value={errorMetrics.total} 
-                    color="#A8B2C8"
-                  />
-                  <HealthBadge 
-                    label="Critical" 
-                    value={errorMetrics.critical} 
-                    color="#EF4444"
-                  />
-                  <HealthBadge 
-                    label="Warnings" 
-                    value={errorMetrics.warnings} 
-                    color="#F59E0B"
-                  />
+                  <HealthBadge label="Total" value={errorMetrics.total} color={PAPER} />
+                  <HealthBadge label="Critical" value={errorMetrics.critical} color={BRAND_BRIGHT} />
+                  <HealthBadge label="Warnings" value={errorMetrics.warnings} color={BRAND} />
                 </div>
-                
+
                 <div className="space-y-2 pt-4">
                   {errorMetrics.byType.length > 0 ? (
                     errorMetrics.byType.slice(0, 5).map((error) => (
-                      <div key={error.type} className="flex justify-between items-center p-2 rounded" style={{ backgroundColor: '#1A2640' }}>
+                      <div key={error.type} className="flex justify-between items-center p-2 rounded-lg" style={{ backgroundColor: LIME_FILL }}>
                         <div className="flex items-center gap-2">
-                          <AlertCircle className="w-4 h-4" style={{ color: '#F59E0B' }} />
-                          <span style={{ color: '#FFFFFF' }} className="text-sm">{error.type}</span>
+                          <AlertCircle className="w-4 h-4" style={{ color: BRAND }} />
+                          <span style={{ color: PAPER }} className="text-sm">{error.type}</span>
                         </div>
-                        <span style={{ color: '#A8B2C8' }} className="text-sm font-semibold">{error.count}</span>
+                        <span style={{ color: 'rgba(246,246,241,0.8)' }} className="text-sm font-semibold">{error.count}</span>
                       </div>
                     ))
                   ) : (
-                    <div className="text-center py-8" style={{ color: '#10B981' }}>
-                      <div className="w-12 h-12 rounded-full mx-auto mb-2 flex items-center justify-center" style={{ backgroundColor: 'rgba(16, 185, 129, 0.1)' }}>
+                    <div className="text-center py-8" style={{ color: BRAND }}>
+                      <div className="w-12 h-12 rounded-full mx-auto mb-2 flex items-center justify-center" style={{ backgroundColor: LIME_FILL }}>
                         <span className="text-2xl">✓</span>
                       </div>
-                      <p className="font-semibold">All Systems Operational</p>
-                      <p className="text-sm mt-1" style={{ color: '#6B7A99' }}>No errors in the last 24 hours</p>
+                      <p className="font-display text-xl">All Systems Operational</p>
+                      <p className="text-sm mt-1" style={{ color: 'rgba(246,246,241,0.6)' }}>No errors in the last 24 hours</p>
                     </div>
                   )}
                 </div>
               </div>
             </ChartCard>
-          </div>
+          </Reveal>
         </div>
       </main>
     </div>
@@ -747,52 +714,51 @@ return (
 interface KPICardProps {
   title: string
   value: number
- icon: ReactNode
+  icon: ReactNode
   format?: 'number' | 'hours' | 'minutes'
   trend?: number
-  color: string
   pulse?: boolean
 }
 
-function KPICard({ title, value, icon, format = 'number', trend, color, pulse }: KPICardProps) {
+function KPICard({ title, value, icon, format = 'number', trend, pulse }: KPICardProps) {
   const formattedValue = formatKPIValue(value, format)
-  
+
   return (
-    <div 
-      className="rounded-lg p-5 transition-all hover:scale-[1.02] relative overflow-hidden"
-      style={{ backgroundColor: '#121A2E' }}
+    <div
+      className="rounded-2xl p-5 border-2 transition-all hover:scale-[1.03] hover:-translate-y-1 relative overflow-hidden h-full"
+      style={{ backgroundColor: INK, borderColor: INK, color: PAPER }}
     >
       {pulse && value > 0 && (
-        <div 
-          className="absolute top-3 right-3 w-2 h-2 rounded-full animate-pulse"
-          style={{ backgroundColor: color, boxShadow: `0 0 10px ${color}` }}
+        <div
+          className="absolute top-3 right-3 w-2.5 h-2.5 rounded-full animate-pulse"
+          style={{ backgroundColor: BRAND, boxShadow: `0 0 12px ${BRAND}` }}
         />
       )}
-      
+
       <div className="flex items-start justify-between mb-3">
-        <span className="text-sm" style={{ color: '#A8B2C8' }}>{title}</span>
-        <div className="p-2 rounded-lg" style={{ backgroundColor: '#1A2640' }}>
-      {cloneElement(icon as ReactElement, {
-  className: 'w-4 h-4',
-  style: { color },
-})}
+        <span className="text-sm font-medium uppercase tracking-wide" style={{ color: 'rgba(246,246,241,0.7)' }}>{title}</span>
+        <div className="p-2 rounded-lg" style={{ backgroundColor: LIME_FILL }}>
+          {cloneElement(icon as ReactElement, {
+            className: 'w-4 h-4',
+            style: { color: BRAND },
+          })}
         </div>
       </div>
-      
-      <div className="text-3xl font-bold mb-1" style={{ color: '#FFFFFF' }}>
+
+      <div className="font-display text-4xl mb-1" style={{ color: BRAND }}>
         {formattedValue}
       </div>
-      
+
       {trend !== undefined && (
         <div className="flex items-center gap-1 text-sm">
-          <TrendingUp 
+          <TrendingUp
             className={`w-4 h-4 ${trend < 0 ? 'rotate-180' : ''}`}
-            style={{ color: trend >= 0 ? '#10B981' : '#EF4444' }}
+            style={{ color: trend >= 0 ? BRAND : BRAND_BRIGHT }}
           />
-          <span style={{ color: trend >= 0 ? '#10B981' : '#EF4444' }}>
+          <span className="font-semibold" style={{ color: trend >= 0 ? BRAND : BRAND_BRIGHT }}>
             {Math.abs(trend).toFixed(1)}%
           </span>
-          <span style={{ color: '#6B7A99' }}>vs last period</span>
+          <span style={{ color: 'rgba(246,246,241,0.5)' }}>vs last period</span>
         </div>
       )}
     </div>
@@ -805,8 +771,8 @@ function KPICard({ title, value, icon, format = 'number', trend, color, pulse }:
 
 function ChartCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-lg p-6" style={{ backgroundColor: '#121A2E' }}>
-      <h3 className="text-lg font-semibold mb-4" style={{ color: '#FFFFFF' }}>
+    <div className="rounded-2xl p-6 border-2 h-full transition-all hover:-translate-y-1" style={{ backgroundColor: INK, borderColor: INK }}>
+      <h3 className="font-display text-2xl mb-4" style={{ color: BRAND }}>
         {title}
       </h3>
       {children}
@@ -822,10 +788,10 @@ function StatRow({ label, value, color }: { label: string; value: number; color:
   return (
     <div className="flex justify-between items-center">
       <div className="flex items-center gap-2">
-        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: color }} />
-        <span style={{ color: '#A8B2C8' }} className="text-sm">{label}</span>
+        <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: color }} />
+        <span style={{ color: 'rgba(246,246,241,0.75)' }} className="text-sm">{label}</span>
       </div>
-      <span style={{ color: '#FFFFFF' }} className="font-semibold">{formatNumber(value)}</span>
+      <span style={{ color: PAPER }} className="font-display text-xl">{formatNumber(value)}</span>
     </div>
   )
 }
@@ -852,17 +818,17 @@ function MetricGauge({
   return (
     <div>
       <div className="flex justify-between mb-2">
-        <span style={{ color: '#A8B2C8' }} className="text-sm">{label}</span>
-        <span style={{ color: '#FFFFFF' }} className="font-semibold">
-          {value.toFixed(1)}{unit} <span style={{ color: '#6B7A99' }}>/ {max}{unit}</span>
+        <span style={{ color: 'rgba(246,246,241,0.75)' }} className="text-sm">{label}</span>
+        <span style={{ color: PAPER }} className="font-semibold">
+          {value.toFixed(1)}{unit} <span style={{ color: 'rgba(246,246,241,0.5)' }}>/ {max}{unit}</span>
         </span>
       </div>
-      <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: '#1A2640' }}>
-        <div 
+      <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: 'rgba(246,246,241,0.15)' }}>
+        <div
           className="h-full rounded-full transition-all duration-500"
-          style={{ 
+          style={{
             width: `${percentage}%`,
-            backgroundColor: color
+            backgroundColor: color,
           }}
         />
       </div>
@@ -876,11 +842,11 @@ function MetricGauge({
 
 function HealthBadge({ label, value, color }: { label: string; value: number; color: string }) {
   return (
-    <div className="rounded-lg p-3 text-center" style={{ backgroundColor: '#1A2640' }}>
-      <div className="text-2xl font-bold mb-1" style={{ color }}>
+    <div className="rounded-lg p-3 text-center" style={{ backgroundColor: LIME_FILL }}>
+      <div className="font-display text-3xl mb-1" style={{ color }}>
         {value}
       </div>
-      <div className="text-xs" style={{ color: '#6B7A99' }}>
+      <div className="text-xs uppercase tracking-wide" style={{ color: 'rgba(246,246,241,0.6)' }}>
         {label}
       </div>
     </div>

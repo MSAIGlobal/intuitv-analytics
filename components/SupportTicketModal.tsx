@@ -54,19 +54,19 @@ export default function SupportTicketModal({
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-blue-700/30 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="p-6 border-b border-blue-700/30">
+        <div className="p-6 border-b border-[rgba(246,246,241,0.2)]">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-bold text-white">Create Support Ticket</h2>
-              <p className="text-blue-300 text-sm mt-1">
+              <h2 className="font-display text-2xl font-bold text-[#C6F833]">Create Support Ticket</h2>
+              <p className="text-[rgba(246,246,241,0.7)] text-sm mt-1">
                 Get help from our engineering team
               </p>
             </div>
             <button
               onClick={onClose}
-              className="w-10 h-10 rounded-full bg-slate-700 text-white hover:bg-slate-600 transition-colors flex items-center justify-center"
+              className="w-10 h-10 rounded-full bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E] transition-colors flex items-center justify-center"
             >
               ✕
             </button>
@@ -76,8 +76,8 @@ export default function SupportTicketModal({
         {success ? (
           <div className="p-12 text-center">
             <div className="text-6xl mb-4">✅</div>
-            <h3 className="text-2xl font-bold text-white mb-2">Ticket Created!</h3>
-            <p className="text-blue-300">
+            <h3 className="font-display text-2xl font-bold text-[#C6F833] mb-2">Ticket Created!</h3>
+            <p className="text-[rgba(246,246,241,0.7)]">
               Our team will respond within 24 hours.
             </p>
           </div>
@@ -85,14 +85,14 @@ export default function SupportTicketModal({
           <form onSubmit={handleSubmit} className="p-6 space-y-6">
             {/* Category */}
             <div>
-              <label className="text-sm text-blue-300 mb-2 block">Category *</label>
+              <label className="text-sm text-[rgba(246,246,241,0.7)] mb-2 block">Category *</label>
               <select
                 required
                 value={formData.category}
                 onChange={(e) =>
                   setFormData({ ...formData, category: e.target.value as any })
                 }
-                className="w-full px-4 py-3 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-blue-500 focus:outline-none"
+                className="w-full px-4 py-3 bg-[rgba(198,248,51,0.12)] text-[#F6F6F1] rounded-lg border-2 border-[rgba(246,246,241,0.2)] focus:border-[#C6F833] focus:outline-none"
               >
                 <option value="analytics">Analytics</option>
                 <option value="playout">Playout</option>
@@ -105,14 +105,14 @@ export default function SupportTicketModal({
 
             {/* Priority */}
             <div>
-              <label className="text-sm text-blue-300 mb-2 block">Priority *</label>
+              <label className="text-sm text-[rgba(246,246,241,0.7)] mb-2 block">Priority *</label>
               <select
                 required
                 value={formData.priority}
                 onChange={(e) =>
                   setFormData({ ...formData, priority: e.target.value as any })
                 }
-                className="w-full px-4 py-3 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-blue-500 focus:outline-none"
+                className="w-full px-4 py-3 bg-[rgba(198,248,51,0.12)] text-[#F6F6F1] rounded-lg border-2 border-[rgba(246,246,241,0.2)] focus:border-[#C6F833] focus:outline-none"
               >
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
@@ -123,20 +123,20 @@ export default function SupportTicketModal({
 
             {/* Subject */}
             <div>
-              <label className="text-sm text-blue-300 mb-2 block">Subject *</label>
+              <label className="text-sm text-[rgba(246,246,241,0.7)] mb-2 block">Subject *</label>
               <input
                 type="text"
                 required
                 value={formData.subject}
                 onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                 placeholder="Brief description of the issue"
-                className="w-full px-4 py-3 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-blue-500 focus:outline-none placeholder-slate-400"
+                className="w-full px-4 py-3 bg-[rgba(198,248,51,0.12)] text-[#F6F6F1] rounded-lg border-2 border-[rgba(246,246,241,0.2)] focus:border-[#C6F833] focus:outline-none placeholder-[rgba(246,246,241,0.5)]"
               />
             </div>
 
             {/* Description */}
             <div>
-              <label className="text-sm text-blue-300 mb-2 block">Description *</label>
+              <label className="text-sm text-[rgba(246,246,241,0.7)] mb-2 block">Description *</label>
               <textarea
                 required
                 value={formData.description}
@@ -145,14 +145,14 @@ export default function SupportTicketModal({
                 }
                 placeholder="Detailed description of the issue, steps to reproduce, etc."
                 rows={6}
-                className="w-full px-4 py-3 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-blue-500 focus:outline-none placeholder-slate-400 resize-none"
+                className="w-full px-4 py-3 bg-[rgba(198,248,51,0.12)] text-[#F6F6F1] rounded-lg border-2 border-[rgba(246,246,241,0.2)] focus:border-[#C6F833] focus:outline-none placeholder-[rgba(246,246,241,0.5)] resize-none"
               />
             </div>
 
             {/* Context Info */}
-            <div className="bg-blue-900/20 border border-blue-700/30 rounded-lg p-4">
-              <div className="text-sm text-blue-300 mb-2">Context Information:</div>
-              <div className="text-xs text-slate-400 space-y-1">
+            <div className="bg-[rgba(198,248,51,0.12)] border-2 border-[rgba(246,246,241,0.2)] rounded-lg p-4">
+              <div className="text-sm text-[#C6F833] mb-2">Context Information:</div>
+              <div className="text-xs text-[rgba(246,246,241,0.7)] space-y-1">
                 <div>Context Type: {contextType}</div>
                 {contextId && <div>Context ID: {contextId}</div>}
                 <div>Current Page: Analytics Dashboard</div>
@@ -164,14 +164,14 @@ export default function SupportTicketModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="flex-1 px-6 py-3 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-all"
+                className="flex-1 px-6 py-3 bg-[#C6F833] text-[#0A0A0A] border-2 border-[#0A0A0A] rounded-lg hover:bg-[#D8FF5E] transition-all"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 px-6 py-3 bg-[#0A0A0A] text-[#C6F833] border-2 border-[#C6F833] rounded-lg hover:bg-[rgba(198,248,51,0.12)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? 'Creating...' : 'Create Ticket'}
               </button>

@@ -44,29 +44,29 @@ export default function GeographicAnalytics({ filters, refreshKey }: GeographicA
   };
 
   return (
-    <div className="bg-gradient-to-br from-slate-800/80 to-slate-800/50 backdrop-blur-sm border border-blue-700/30 rounded-xl p-6 shadow-xl">
+    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-white mb-1">Geographic Distribution</h2>
-          <p className="text-blue-300">Watch hours by country and region</p>
+          <h2 className="font-display text-2xl font-bold text-[#C6F833] mb-1">Geographic Distribution</h2>
+          <p className="text-[rgba(246,246,241,0.7)]">Watch hours by country and region</p>
         </div>
         <div className="flex gap-2">
           <button
             onClick={() => setView('world')}
-            className={`px-4 py-2 rounded-lg transition-all ${
+            className={`px-4 py-2 rounded-lg border-2 border-[#0A0A0A] transition-all ${
               view === 'world'
-                ? 'bg-blue-600 text-white'
-                : 'bg-slate-700 text-blue-300 hover:bg-slate-600'
+                ? 'bg-[#0A0A0A] text-[#C6F833]'
+                : 'bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E]'
             }`}
           >
             World Map
           </button>
           <button
             onClick={() => setView('states')}
-            className={`px-4 py-2 rounded-lg transition-all ${
+            className={`px-4 py-2 rounded-lg border-2 border-[#0A0A0A] transition-all ${
               view === 'states'
-                ? 'bg-blue-600 text-white'
-                : 'bg-slate-700 text-blue-300 hover:bg-slate-600'
+                ? 'bg-[#0A0A0A] text-[#C6F833]'
+                : 'bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E]'
             }`}
           >
             US States
@@ -76,18 +76,18 @@ export default function GeographicAnalytics({ filters, refreshKey }: GeographicA
 
       {loading ? (
         <div className="h-96 flex items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#C6F833]"></div>
         </div>
       ) : (
         <>
           {view === 'world' ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* World Map Placeholder */}
-              <div className="bg-slate-700/30 rounded-lg p-6 flex items-center justify-center">
+              <div className="bg-[rgba(198,248,51,0.12)] rounded-lg p-6 flex items-center justify-center">
                 <div className="text-center">
                   <div className="text-6xl mb-4">🌍</div>
-                  <p className="text-blue-300">World Map Visualization</p>
-                  <p className="text-sm text-slate-400 mt-2">
+                  <p className="text-[rgba(246,246,241,0.7)]">World Map Visualization</p>
+                  <p className="text-sm text-[rgba(246,246,241,0.7)] mt-2">
                     Integrate with Mapbox or similar for full map view
                   </p>
                 </div>
@@ -95,25 +95,25 @@ export default function GeographicAnalytics({ filters, refreshKey }: GeographicA
 
               {/* Country Rankings */}
               <div>
-                <h3 className="text-lg font-semibold text-white mb-4">Top Countries</h3>
+                <h3 className="font-display text-lg font-semibold text-[#C6F833] mb-4">Top Countries</h3>
                 <div className="space-y-3">
                   {geoData.map((country, index) => (
                     <div
                       key={country.countryCode}
-                      className="flex items-center gap-4 p-4 bg-slate-700/30 rounded-lg hover:bg-slate-700/50 transition-all"
+                      className="flex items-center gap-4 p-4 bg-[rgba(198,248,51,0.12)] rounded-lg hover:bg-[rgba(198,248,51,0.2)] transition-all"
                     >
                       <div className="text-2xl">{country.countryCode === 'GB' ? '🇬🇧' : country.countryCode === 'US' ? '🇺🇸' : country.countryCode === 'DE' ? '🇩🇪' : country.countryCode === 'FR' ? '🇫🇷' : country.countryCode === 'CA' ? '🇨🇦' : '🌍'}</div>
                       <div className="flex-1">
-                        <div className="text-white font-semibold">{country.country}</div>
-                        <div className="text-sm text-blue-300">
+                        <div className="text-[#F6F6F1] font-semibold">{country.country}</div>
+                        <div className="text-sm text-[rgba(246,246,241,0.7)]">
                           {formatNumber(country.uniqueViewers)} viewers
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-white font-bold">
+                        <div className="text-[#F6F6F1] font-bold">
                           {formatNumber(country.watchHours)}
                         </div>
-                        <div className="text-xs text-blue-300">hours</div>
+                        <div className="text-xs text-[rgba(246,246,241,0.7)]">hours</div>
                       </div>
                     </div>
                   ))}
@@ -123,11 +123,11 @@ export default function GeographicAnalytics({ filters, refreshKey }: GeographicA
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* US Map Placeholder */}
-              <div className="bg-slate-700/30 rounded-lg p-6 flex items-center justify-center">
+              <div className="bg-[rgba(198,248,51,0.12)] rounded-lg p-6 flex items-center justify-center">
                 <div className="text-center">
                   <div className="text-6xl mb-4">🇺🇸</div>
-                  <p className="text-blue-300">US State Map Visualization</p>
-                  <p className="text-sm text-slate-400 mt-2">
+                  <p className="text-[rgba(246,246,241,0.7)]">US State Map Visualization</p>
+                  <p className="text-sm text-[rgba(246,246,241,0.7)] mt-2">
                     Integrate with D3 or similar for choropleth map
                   </p>
                 </div>
@@ -135,25 +135,25 @@ export default function GeographicAnalytics({ filters, refreshKey }: GeographicA
 
               {/* State Rankings */}
               <div>
-                <h3 className="text-lg font-semibold text-white mb-4">Top US States</h3>
+                <h3 className="font-display text-lg font-semibold text-[#C6F833] mb-4">Top US States</h3>
                 <div className="space-y-3">
                   {stateData.map((state, index) => (
                     <div
                       key={state.stateCode}
-                      className="flex items-center gap-4 p-4 bg-slate-700/30 rounded-lg hover:bg-slate-700/50 transition-all"
+                      className="flex items-center gap-4 p-4 bg-[rgba(198,248,51,0.12)] rounded-lg hover:bg-[rgba(198,248,51,0.2)] transition-all"
                     >
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#C6F833] text-[#0A0A0A] flex items-center justify-center font-bold">
                         {index + 1}
                       </div>
                       <div className="flex-1">
-                        <div className="text-white font-semibold">{state.state}</div>
-                        <div className="text-sm text-blue-300">{formatNumber(state.views)} views</div>
+                        <div className="text-[#F6F6F1] font-semibold">{state.state}</div>
+                        <div className="text-sm text-[rgba(246,246,241,0.7)]">{formatNumber(state.views)} views</div>
                       </div>
                       <div className="text-right">
-                        <div className="text-white font-bold">
+                        <div className="text-[#F6F6F1] font-bold">
                           {formatNumber(state.watchHours)}
                         </div>
-                        <div className="text-xs text-blue-300">hours</div>
+                        <div className="text-xs text-[rgba(246,246,241,0.7)]">hours</div>
                       </div>
                     </div>
                   ))}

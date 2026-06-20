@@ -31,9 +31,9 @@ export default function ViewerBehavior({ filters, refreshKey }: ViewerBehaviorPr
 
   if (loading || !behavior) {
     return (
-      <div className="bg-slate-800/50 backdrop-blur-sm border border-blue-700/30 rounded-xl p-6">
+      <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6">
         <div className="h-64 flex items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#C6F833]"></div>
         </div>
       </div>
     );
@@ -45,48 +45,48 @@ export default function ViewerBehavior({ filters, refreshKey }: ViewerBehaviorPr
       value: behavior.completionRate,
       format: 'percent',
       icon: '✅',
-      color: 'from-green-600 to-emerald-600',
+      color: 'bg-[#C6F833] text-[#0A0A0A]',
     },
     {
       label: 'Drop-off Rate',
       value: behavior.dropoffRate,
       format: 'percent',
       icon: '⚠️',
-      color: 'from-red-600 to-rose-600',
+      color: 'bg-[#D8FF5E] text-[#0A0A0A]',
     },
     {
       label: 'Avg Watch Time',
       value: behavior.avgWatchTimePerContent,
       format: 'minutes',
       icon: '⏱️',
-      color: 'from-blue-600 to-cyan-600',
+      color: 'bg-[#9BD600] text-[#0A0A0A]',
     },
     {
       label: 'Repeat Frequency',
       value: behavior.repeatViewerFrequency,
       format: 'times',
       icon: '🔄',
-      color: 'from-purple-600 to-pink-600',
+      color: 'bg-[#F6F6F1] text-[#0A0A0A]',
     },
   ];
 
   return (
-    <div className="bg-gradient-to-br from-slate-800/80 to-slate-800/50 backdrop-blur-sm border border-blue-700/30 rounded-xl p-6 shadow-xl">
+    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-white mb-1">Viewer Behavior Analytics</h2>
-        <p className="text-blue-300">Engagement patterns and content performance</p>
+        <h2 className="font-display text-2xl font-bold text-[#C6F833] mb-1">Viewer Behavior Analytics</h2>
+        <p className="text-[rgba(246,246,241,0.7)]">Engagement patterns and content performance</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {metrics.map((metric) => (
           <div
             key={metric.label}
-            className="bg-slate-700/30 rounded-lg p-6 hover:bg-slate-700/50 transition-all"
+            className="bg-[rgba(198,248,51,0.12)] rounded-lg p-6 hover:bg-[rgba(198,248,51,0.2)] transition-all"
           >
             <div className="flex items-start justify-between mb-4">
               <span className="text-3xl">{metric.icon}</span>
               <div
-                className={`px-3 py-1 rounded-full bg-gradient-to-r ${metric.color} text-white text-sm font-semibold`}
+                className={`px-3 py-1 rounded-full ${metric.color} text-sm font-semibold`}
               >
                 {metric.format === 'percent'
                   ? `${metric.value.toFixed(1)}%`
@@ -95,7 +95,7 @@ export default function ViewerBehavior({ filters, refreshKey }: ViewerBehaviorPr
                   : `${metric.value.toFixed(1)}x`}
               </div>
             </div>
-            <div className="text-blue-300">{metric.label}</div>
+            <div className="text-[rgba(246,246,241,0.7)]">{metric.label}</div>
           </div>
         ))}
       </div>
@@ -103,24 +103,24 @@ export default function ViewerBehavior({ filters, refreshKey }: ViewerBehaviorPr
       {/* Top Drop-off Points */}
       {behavior.topDropoffPoints && behavior.topDropoffPoints.length > 0 && (
         <div>
-          <h3 className="text-lg font-semibold text-white mb-4">Top Drop-off Points</h3>
+          <h3 className="font-display text-lg font-semibold text-[#C6F833] mb-4">Top Drop-off Points</h3>
           <div className="space-y-3">
             {behavior.topDropoffPoints.map((point) => (
               <div
                 key={point.contentId}
-                className="flex items-center gap-4 p-4 bg-slate-700/30 rounded-lg hover:bg-slate-700/50 transition-all"
+                className="flex items-center gap-4 p-4 bg-[rgba(198,248,51,0.12)] rounded-lg hover:bg-[rgba(198,248,51,0.2)] transition-all"
               >
                 <div className="flex-1">
-                  <div className="text-white font-semibold">{point.contentTitle}</div>
-                  <div className="text-sm text-blue-300">
+                  <div className="text-[#F6F6F1] font-semibold">{point.contentTitle}</div>
+                  <div className="text-sm text-[rgba(246,246,241,0.7)]">
                     at {Math.floor(point.timestamp / 60)}:{(point.timestamp % 60).toString().padStart(2, '0')}
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-red-400 font-bold">
+                  <div className="text-[#C6F833] font-bold">
                     {point.dropoffPercentage.toFixed(1)}%
                   </div>
-                  <div className="text-xs text-blue-300">drop-off</div>
+                  <div className="text-xs text-[rgba(246,246,241,0.7)]">drop-off</div>
                 </div>
               </div>
             ))}

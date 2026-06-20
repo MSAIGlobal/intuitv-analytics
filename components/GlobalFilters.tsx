@@ -31,12 +31,12 @@ export default function GlobalFilters({ filters, onFilterChange }: GlobalFilters
   };
 
   return (
-    <div className="bg-gradient-to-br from-slate-800/80 to-slate-800/50 backdrop-blur-sm border border-blue-700/30 rounded-xl p-6 shadow-xl">
+    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-white">Filters</h3>
+        <h3 className="font-display text-lg font-semibold text-[#C6F833]">Filters</h3>
         <button
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="text-blue-400 hover:text-blue-300 transition-colors text-sm flex items-center gap-2"
+          className="text-[#C6F833] hover:text-[#D8FF5E] transition-colors text-sm flex items-center gap-2"
         >
           {showAdvanced ? 'Hide' : 'Show'} Advanced
           <svg
@@ -52,13 +52,13 @@ export default function GlobalFilters({ filters, onFilterChange }: GlobalFilters
 
       {/* Quick Date Ranges */}
       <div className="mb-6">
-        <label className="text-sm text-blue-300 mb-2 block">Date Range</label>
+        <label className="text-sm text-[rgba(246,246,241,0.7)] mb-2 block">Date Range</label>
         <div className="flex flex-wrap gap-2">
           {quickDateRanges.map((range) => (
             <button
               key={range.label}
               onClick={() => handleQuickDate(range.days)}
-              className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-all"
+              className="px-4 py-2 bg-[#C6F833] text-[#0A0A0A] border-2 border-[#0A0A0A] rounded-lg hover:bg-[#D8FF5E] transition-all"
             >
               {range.label}
             </button>
@@ -68,12 +68,12 @@ export default function GlobalFilters({ filters, onFilterChange }: GlobalFilters
 
       {/* Advanced Filters */}
       {showAdvanced && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-blue-700/30">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-[rgba(246,246,241,0.2)]">
           {/* Platform Filter */}
           <div>
-            <label className="text-sm text-blue-300 mb-2 block">Platform</label>
+            <label className="text-sm text-[rgba(246,246,241,0.7)] mb-2 block">Platform</label>
             <select
-              className="w-full px-4 py-2 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-blue-500 focus:outline-none"
+              className="w-full px-4 py-2 bg-[rgba(198,248,51,0.12)] text-[#F6F6F1] rounded-lg border-2 border-[rgba(246,246,241,0.2)] focus:border-[#C6F833] focus:outline-none"
               onChange={(e) => {
                 const value = e.target.value;
                 onFilterChange({
@@ -92,9 +92,9 @@ export default function GlobalFilters({ filters, onFilterChange }: GlobalFilters
 
           {/* Country Filter */}
           <div>
-            <label className="text-sm text-blue-300 mb-2 block">Country</label>
+            <label className="text-sm text-[rgba(246,246,241,0.7)] mb-2 block">Country</label>
             <select
-              className="w-full px-4 py-2 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-blue-500 focus:outline-none"
+              className="w-full px-4 py-2 bg-[rgba(198,248,51,0.12)] text-[#F6F6F1] rounded-lg border-2 border-[rgba(246,246,241,0.2)] focus:border-[#C6F833] focus:outline-none"
               onChange={(e) => {
                 const value = e.target.value;
                 onFilterChange({
@@ -127,7 +127,7 @@ export default function GlobalFilters({ filters, onFilterChange }: GlobalFilters
                   studioIds: undefined,
                 });
               }}
-              className="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all"
+              className="w-full px-4 py-2 bg-[#0A0A0A] text-[#C6F833] border-2 border-[#C6F833] rounded-lg hover:bg-[rgba(198,248,51,0.12)] transition-all"
             >
               Clear All
             </button>

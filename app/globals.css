@@ -2,5 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-body { margin: 0; padding: 0; background: #000814; color: white; }
-@keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.6; } }
+:root {
+  --brand: #C6F833;
+  --brand-bright: #D8FF5E;
+  --brand-deep: #9BD600;
+  --ink: #0A0A0A;
+  --paper: #F6F6F1;
+}
+
+html { scroll-behavior: smooth; }
+body { margin: 0; padding: 0; background: var(--brand); color: var(--ink); }
+
+.font-display {
+  font-family: var(--font-anton), Impact, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: .95;
+}
+
+/* Smooth section reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .7s cubic-bezier(.22, 1, .36, 1), transform .7s cubic-bezier(.22, 1, .36, 1);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* Marquee banner */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 22s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .marquee-track { animation: none; }
+}
