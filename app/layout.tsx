@@ -10,10 +10,16 @@ export const metadata = {
   description: 'Real-time analytics dashboard for IntuiTV platform',
 }
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover' as const,
+}
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${anton.variable} ${inter.variable}`}>
-      <body className="bg-brand text-ink font-sans antialiased">{children}</body>
+      <body className="bg-brand text-ink font-sans antialiased overflow-x-hidden">{children}</body>
     </html>
   )
 }

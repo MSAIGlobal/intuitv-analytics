@@ -60,7 +60,7 @@ export default function PlatformDeviceBreakdown({ filters, refreshKey }: Platfor
 
   return (
     <Reveal>
-      <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+      <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
         <div className="mb-6">
           <h2 className="font-display text-2xl text-[#C6F833] mb-1">Platform & Device Analytics</h2>
           <p className="text-[rgba(246,246,241,0.7)]">TV, Mobile, and Web distribution</p>

@@ -31,7 +31,7 @@ export default function ViewerBehavior({ filters, refreshKey }: ViewerBehaviorPr
 
   if (loading || !behavior) {
     return (
-      <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6">
+      <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6">
         <div className="h-64 flex items-center justify-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#C6F833]"></div>
         </div>
@@ -71,7 +71,7 @@ export default function ViewerBehavior({ filters, refreshKey }: ViewerBehaviorPr
   ];
 
   return (
-    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
       <div className="mb-6">
         <h2 className="font-display text-2xl font-bold text-[#C6F833] mb-1">Viewer Behavior Analytics</h2>
         <p className="text-[rgba(246,246,241,0.7)]">Engagement patterns and content performance</p>

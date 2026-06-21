@@ -84,9 +84,9 @@ export const ContentPerformance: React.FC<ContentPerformanceProps> = ({
     <div className="space-y-6">
       {/* Header */}
       <Reveal>
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
           <div>
-            <h2 className="font-display text-3xl text-[#0A0A0A]">
+            <h2 className="font-display text-2xl sm:text-3xl text-[#0A0A0A]">
               Content Performance Analytics
             </h2>
             <p className="text-sm text-[rgba(10,10,10,0.65)]">
@@ -95,7 +95,7 @@ export const ContentPerformance: React.FC<ContentPerformanceProps> = ({
           </div>
 
           {/* Timeframe Selector */}
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {['24h', '7d', '30d', '90d', 'all'].map((tf) => (
               <button
                 key={tf}
@@ -132,7 +132,7 @@ export const ContentPerformance: React.FC<ContentPerformanceProps> = ({
 
       {/* Views Over Time Chart */}
       <Reveal>
-        <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+        <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
           <h3 className="font-display text-2xl text-[#C6F833] mb-4">Views Over Time</h3>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={stats}>
@@ -162,7 +162,7 @@ export const ContentPerformance: React.FC<ContentPerformanceProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Engagement Over Time */}
         <Reveal>
-          <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+          <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
             <h3 className="font-display text-2xl text-[#C6F833] mb-4">Engagement Rate</h3>
             <ResponsiveContainer width="100%" height={250}>
               <LineChart data={stats}>
@@ -187,7 +187,7 @@ export const ContentPerformance: React.FC<ContentPerformanceProps> = ({
 
         {/* Watch Time Analysis */}
         <Reveal delay={80}>
-          <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+          <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
             <h3 className="font-display text-2xl text-[#C6F833] mb-4">Average Watch Time</h3>
             <ResponsiveContainer width="100%" height={250}>
               <BarChart data={stats}>
@@ -208,7 +208,7 @@ export const ContentPerformance: React.FC<ContentPerformanceProps> = ({
 
       {/* Completion Rate Chart */}
       <Reveal>
-        <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+        <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
           <h3 className="font-display text-2xl text-[#C6F833] mb-4">Completion Rate Trend</h3>
           <ResponsiveContainer width="100%" height={200}>
             <LineChart data={stats}>
@@ -240,7 +240,7 @@ const StatCard: React.FC<{
   icon: string;
   trend?: string;
 }> = ({ title, value, icon, trend }) => (
-  <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl hover:border-[#C6F833] transition-all">
+  <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl hover:border-[#C6F833] transition-all">
     <div className="flex items-center justify-between mb-2">
       <p className="text-sm text-[rgba(246,246,241,0.7)]">{title}</p>
       <span className="text-2xl">{icon}</span>

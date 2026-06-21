@@ -80,11 +80,11 @@ export default function KPIStrip({ filters, refreshKey }: KPIStripProps) {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
         {[...Array(5)].map((_, i) => (
           <div
             key={i}
-            className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 animate-pulse"
+            className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 animate-pulse"
           >
             <div className="h-12 bg-[rgba(198,248,51,0.12)] rounded mb-2"></div>
             <div className="h-8 bg-[rgba(198,248,51,0.12)] rounded mb-2"></div>
@@ -96,11 +96,11 @@ export default function KPIStrip({ filters, refreshKey }: KPIStripProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
       {kpis.map((kpi, index) => (
         <div
           key={index}
-          className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 hover:border-[#C6F833] transition-all shadow-xl"
+          className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 hover:border-[#C6F833] transition-all shadow-xl"
         >
           <div className="flex items-start justify-between mb-4">
             <span className="text-3xl">{kpi.icon}</span>

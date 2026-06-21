@@ -37,13 +37,13 @@ export default function ChannelRankings({ filters, refreshKey }: ChannelRankings
   };
 
   return (
-    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
-      <div className="flex items-center justify-between mb-6">
+    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-          <h2 className="font-display text-2xl font-bold text-[#C6F833] mb-1">Top Channels</h2>
+          <h2 className="font-display text-xl sm:text-2xl font-bold text-[#C6F833] mb-1">Top Channels</h2>
           <p className="text-[rgba(246,246,241,0.7)]">By watch time and views</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setMetric('watchTime')}
             className={`px-4 py-2 rounded-lg border-2 border-[#0A0A0A] transition-all ${
@@ -106,7 +106,7 @@ export default function ChannelRankings({ filters, refreshKey }: ChannelRankings
               </div>
 
               {/* Metrics */}
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-3 sm:gap-6 shrink-0">
                 <div className="text-right">
                   <div className="text-[#F6F6F1] font-bold">
                     {formatNumber(metric === 'watchTime' ? channel.watchTime : channel.views)}
@@ -117,7 +117,7 @@ export default function ChannelRankings({ filters, refreshKey }: ChannelRankings
                 </div>
 
                 {/* Progress Bar */}
-                <div className="w-32">
+                <div className="hidden sm:block w-20 md:w-32">
                   <div className="h-2 bg-[rgba(246,246,241,0.2)] rounded-full overflow-hidden">
                     <div
                       className="h-full bg-[#C6F833]"

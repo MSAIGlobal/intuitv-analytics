@@ -64,7 +64,7 @@ const MetricCard: React.FC<{
   };
 
   return (
-    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl hover:border-[#C6F833] transition-all">
+    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl hover:border-[#C6F833] transition-all">
       <div className="flex items-center justify-between">
         <div className="flex-1">
           <p className="text-sm text-[rgba(246,246,241,0.7)]">{title}</p>
