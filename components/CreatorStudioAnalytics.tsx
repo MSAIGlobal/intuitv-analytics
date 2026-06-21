@@ -43,15 +43,15 @@ export default function CreatorStudioAnalytics({ filters, refreshKey }: CreatorS
   };
 
   return (
-    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
-      <div className="flex items-center justify-between mb-6">
+    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-          <h2 className="font-display text-2xl font-bold text-[#C6F833] mb-1">
+          <h2 className="font-display text-xl sm:text-2xl font-bold text-[#C6F833] mb-1">
             {view === 'creators' ? 'Creator' : 'Studio'} Analytics
           </h2>
           <p className="text-[rgba(246,246,241,0.7)]">Performance by creator and studio</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setView('creators')}
             className={`px-4 py-2 rounded-lg border-2 border-[#0A0A0A] transition-all ${

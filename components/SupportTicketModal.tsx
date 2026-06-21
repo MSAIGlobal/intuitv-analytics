@@ -54,19 +54,20 @@ export default function SupportTicketModal({
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl shadow-2xl w-[95vw] max-w-2xl max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="p-6 border-b border-[rgba(246,246,241,0.2)]">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="font-display text-2xl font-bold text-[#C6F833]">Create Support Ticket</h2>
+        <div className="p-4 sm:p-6 border-b border-[rgba(246,246,241,0.2)]">
+          <div className="flex items-center justify-between gap-3">
+            <div className="min-w-0">
+              <h2 className="font-display text-xl sm:text-2xl font-bold text-[#C6F833]">Create Support Ticket</h2>
               <p className="text-[rgba(246,246,241,0.7)] text-sm mt-1">
                 Get help from our engineering team
               </p>
             </div>
             <button
               onClick={onClose}
-              className="w-10 h-10 rounded-full bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E] transition-colors flex items-center justify-center"
+              aria-label="Close"
+              className="shrink-0 w-10 h-10 rounded-full bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E] transition-colors flex items-center justify-center"
             >
               ✕
             </button>
@@ -74,7 +75,7 @@ export default function SupportTicketModal({
         </div>
 
         {success ? (
-          <div className="p-12 text-center">
+          <div className="p-8 sm:p-12 text-center">
             <div className="text-6xl mb-4">✅</div>
             <h3 className="font-display text-2xl font-bold text-[#C6F833] mb-2">Ticket Created!</h3>
             <p className="text-[rgba(246,246,241,0.7)]">
@@ -82,7 +83,7 @@ export default function SupportTicketModal({
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="p-6 space-y-6">
+          <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-6">
             {/* Category */}
             <div>
               <label className="text-sm text-[rgba(246,246,241,0.7)] mb-2 block">Category *</label>

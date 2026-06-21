@@ -31,7 +31,7 @@ export default function GlobalFilters({ filters, onFilterChange }: GlobalFilters
   };
 
   return (
-    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
       <div className="flex items-center justify-between mb-6">
         <h3 className="font-display text-lg font-semibold text-[#C6F833]">Filters</h3>
         <button

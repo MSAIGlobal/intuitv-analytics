@@ -82,11 +82,11 @@ export const EngagementCharts: React.FC = () => {
     <div className="space-y-6">
       {/* Timeframe Selector */}
       <Reveal>
-        <div className="flex justify-between items-center">
-          <h2 className="font-display text-3xl text-[#0A0A0A]">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+          <h2 className="font-display text-2xl sm:text-3xl text-[#0A0A0A]">
             Engagement Analytics
           </h2>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {['24h', '7d', '30d'].map((tf) => (
               <button
                 key={tf}
@@ -106,7 +106,7 @@ export const EngagementCharts: React.FC = () => {
 
       {/* Hourly Engagement Chart */}
       <Reveal>
-        <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+        <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
           <h3 className="font-display text-2xl text-[#C6F833] mb-4">Hourly Activity</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={overview.hourly_data}>
@@ -143,7 +143,7 @@ export const EngagementCharts: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Device Distribution */}
         <Reveal>
-          <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+          <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
             <h3 className="font-display text-2xl text-[#C6F833] mb-4">Viewers by Device</h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={deviceData} layout="vertical">
@@ -159,7 +159,7 @@ export const EngagementCharts: React.FC = () => {
 
         {/* Platform Distribution */}
         <Reveal delay={80}>
-          <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+          <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
             <h3 className="font-display text-2xl text-[#C6F833] mb-4">Viewers by Platform</h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={platformData}>
@@ -176,7 +176,7 @@ export const EngagementCharts: React.FC = () => {
 
       {/* Event Type Distribution */}
       <Reveal>
-        <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
+        <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
           <h3 className="font-display text-2xl text-[#C6F833] mb-4">Event Distribution</h3>
           <ResponsiveContainer width="100%" height={350}>
             <RadarChart data={engagementByType}>
@@ -219,7 +219,7 @@ const MetricCard: React.FC<{
   change: string;
   positive: boolean;
 }> = ({ title, value, change, positive }) => (
-  <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl hover:border-[#C6F833] transition-all">
+  <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl hover:border-[#C6F833] transition-all">
     <p className="text-sm text-[rgba(246,246,241,0.7)] mb-1">{title}</p>
     <div className="flex items-baseline justify-between">
       <p className="font-display text-2xl text-[#C6F833]">{value}</p>

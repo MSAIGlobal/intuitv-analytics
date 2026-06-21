@@ -44,13 +44,13 @@ export default function GeographicAnalytics({ filters, refreshKey }: GeographicA
   };
 
   return (
-    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-6 shadow-xl">
-      <div className="flex items-center justify-between mb-6">
+    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-          <h2 className="font-display text-2xl font-bold text-[#C6F833] mb-1">Geographic Distribution</h2>
+          <h2 className="font-display text-xl sm:text-2xl font-bold text-[#C6F833] mb-1">Geographic Distribution</h2>
           <p className="text-[rgba(246,246,241,0.7)]">Watch hours by country and region</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setView('world')}
             className={`px-4 py-2 rounded-lg border-2 border-[#0A0A0A] transition-all ${

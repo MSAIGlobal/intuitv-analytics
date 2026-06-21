@@ -329,14 +329,14 @@ return (
       className="sticky top-0 z-50 border-b-4"
       style={{ backgroundColor: BRAND, borderColor: INK }}
     >
-      <div className="max-w-[1920px] mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex flex-wrap items-center justify-between gap-3">
 
         {/* Left: Logo + Title (clickable) */}
         <a
           href="https://mother.mediastreamai.com"
-          className="flex items-center gap-4 transition-transform hover:scale-[1.02]"
+          className="flex items-center gap-3 sm:gap-4 transition-transform hover:scale-[1.02] min-w-0"
         >
-          <div className="relative w-10 h-10 shrink-0 rounded-lg overflow-hidden border-2" style={{ borderColor: INK, backgroundColor: INK }}>
+          <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-lg overflow-hidden border-2" style={{ borderColor: INK, backgroundColor: INK }}>
             <Image
               src="/logo_icon.png"
               alt="MOTHER"
@@ -346,18 +346,18 @@ return (
             />
           </div>
 
-          <div className="h-8 w-1" style={{ backgroundColor: INK }} />
+          <div className="hidden sm:block h-8 w-1 shrink-0" style={{ backgroundColor: INK }} />
 
-          <h1 className="font-display text-2xl md:text-3xl whitespace-nowrap" style={{ color: INK }}>
+          <h1 className="font-display text-xl sm:text-2xl md:text-3xl truncate" style={{ color: INK }}>
             Analytics Dashboard
           </h1>
         </a>
 
           {/* Right: Search + Actions */}
-          <div className="flex items-center gap-3">
-            <div className="relative">
+          <div className="flex items-center gap-2 sm:gap-3 flex-1 sm:flex-none justify-end min-w-0">
+            <div className="relative flex-1 sm:flex-none min-w-0">
               <Search
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4"
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none"
                 style={{ color: INK_SOFT }}
               />
               <input
@@ -365,19 +365,19 @@ return (
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search metrics..."
-                className="pl-10 pr-4 py-2 rounded-lg text-sm font-medium transition-all focus:outline-none focus:ring-2"
+                className="pl-10 pr-4 py-2 rounded-lg text-sm font-medium transition-all focus:outline-none focus:ring-2 w-full sm:w-[220px] lg:w-[280px]"
                 style={{
                   backgroundColor: PAPER,
                   borderWidth: '2px',
                   borderColor: INK,
                   color: INK,
-                  width: '280px',
                 }}
               />
             </div>
 
             <button
-              className="relative p-2 rounded-lg border-2 transition-all hover:scale-105"
+              aria-label="Notifications"
+              className="relative shrink-0 p-2.5 rounded-lg border-2 transition-all hover:scale-105"
               style={{ backgroundColor: INK, borderColor: INK, color: BRAND }}
             >
               <Bell className="w-5 h-5" style={{ color: BRAND }} />
@@ -398,7 +398,8 @@ return (
             <button
               onClick={handleRefresh}
               disabled={refreshing}
-              className="p-2 rounded-lg border-2 transition-all hover:scale-105 disabled:opacity-50"
+              aria-label="Refresh"
+              className="shrink-0 p-2.5 rounded-lg border-2 transition-all hover:scale-105 disabled:opacity-50"
               style={{ backgroundColor: INK, borderColor: INK, color: BRAND }}
             >
               <RefreshCw
@@ -414,7 +415,7 @@ return (
       <div className="overflow-hidden border-b-4" style={{ backgroundColor: INK, borderColor: INK }}>
         <div className="marquee-track py-2">
           {Array.from({ length: 2 }).map((_, i) => (
-            <span key={i} className="font-display text-lg md:text-xl px-4" style={{ color: BRAND }} aria-hidden={i === 1}>
+            <span key={i} className="font-display text-base sm:text-lg md:text-xl px-4" style={{ color: BRAND }} aria-hidden={i === 1}>
               BUILT DIFFERENT&nbsp;•&nbsp;INTUITV&nbsp;•&nbsp;BUILT DIFFERENT&nbsp;•&nbsp;INTUITV&nbsp;•&nbsp;BUILT DIFFERENT&nbsp;•&nbsp;INTUITV&nbsp;•&nbsp;
             </span>
           ))}
@@ -422,7 +423,7 @@ return (
       </div>
 
       {error && (
-        <div className="max-w-[1920px] mx-auto px-6 py-4">
+        <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="p-4 rounded-lg flex items-center gap-3 border-2" style={{ backgroundColor: INK, borderColor: INK }}>
             <AlertCircle className="w-5 h-5" style={{ color: BRAND_BRIGHT }} />
             <span className="font-semibold" style={{ color: PAPER }}>{error}</span>
@@ -431,9 +432,9 @@ return (
       )}
 
       {/* Title + Timeframe Selector */}
-      <div className="max-w-[1920px] mx-auto px-6 pt-8 pb-4">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-4">
         <Reveal>
-          <h2 className="font-display text-5xl md:text-7xl mb-6" style={{ color: INK }}>
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-5 sm:mb-6" style={{ color: INK }}>
             Built Different.<br />The Numbers Prove It.
           </h2>
         </Reveal>
@@ -457,9 +458,9 @@ return (
         </Reveal>
       </div>
 
-      <main className="max-w-[1920px] mx-auto px-6 pb-8">
+      <main className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         {/* KPI Cards Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-6">
           {[
             { title: 'Total Views', value: overview.totalViews, icon: <Eye />, trend: overview.viewsTrend },
             { title: 'Unique Viewers', value: overview.uniqueViewers, icon: <Users />, trend: overview.viewersTrend },
@@ -481,7 +482,7 @@ return (
         </div>
 
         {/* Main Charts Grid */}
-        <div className="grid grid-cols-12 gap-6 mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 mb-6">
           {/* Time Series Chart - Full Width */}
           <Reveal className="col-span-12">
             <ChartCard title="Viewership Over Time">
@@ -725,7 +726,7 @@ function KPICard({ title, value, icon, format = 'number', trend, pulse }: KPICar
 
   return (
     <div
-      className="rounded-2xl p-5 border-2 transition-all hover:scale-[1.03] hover:-translate-y-1 relative overflow-hidden h-full"
+      className="rounded-2xl p-4 sm:p-5 border-2 transition-all hover:scale-[1.03] hover:-translate-y-1 relative overflow-hidden h-full"
       style={{ backgroundColor: INK, borderColor: INK, color: PAPER }}
     >
       {pulse && value > 0 && (
@@ -735,9 +736,9 @@ function KPICard({ title, value, icon, format = 'number', trend, pulse }: KPICar
         />
       )}
 
-      <div className="flex items-start justify-between mb-3">
-        <span className="text-sm font-medium uppercase tracking-wide" style={{ color: 'rgba(246,246,241,0.7)' }}>{title}</span>
-        <div className="p-2 rounded-lg" style={{ backgroundColor: LIME_FILL }}>
+      <div className="flex items-start justify-between mb-3 gap-2">
+        <span className="text-xs sm:text-sm font-medium uppercase tracking-wide min-w-0 break-words" style={{ color: 'rgba(246,246,241,0.7)' }}>{title}</span>
+        <div className="p-2 rounded-lg shrink-0" style={{ backgroundColor: LIME_FILL }}>
           {cloneElement(icon as ReactElement, {
             className: 'w-4 h-4',
             style: { color: BRAND },
@@ -745,7 +746,7 @@ function KPICard({ title, value, icon, format = 'number', trend, pulse }: KPICar
         </div>
       </div>
 
-      <div className="font-display text-4xl mb-1" style={{ color: BRAND }}>
+      <div className="font-display text-3xl sm:text-4xl mb-1 break-words" style={{ color: BRAND }}>
         {formattedValue}
       </div>
 
@@ -771,8 +772,8 @@ function KPICard({ title, value, icon, format = 'number', trend, pulse }: KPICar
 
 function ChartCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl p-6 border-2 h-full transition-all hover:-translate-y-1" style={{ backgroundColor: INK, borderColor: INK }}>
-      <h3 className="font-display text-2xl mb-4" style={{ color: BRAND }}>
+    <div className="rounded-2xl p-4 sm:p-6 border-2 h-full transition-all hover:-translate-y-1" style={{ backgroundColor: INK, borderColor: INK }}>
+      <h3 className="font-display text-xl sm:text-2xl mb-4" style={{ color: BRAND }}>
         {title}
       </h3>
       {children}
