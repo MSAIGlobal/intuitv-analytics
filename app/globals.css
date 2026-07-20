@@ -16,7 +16,7 @@ body { margin: 0; padding: 0; background: var(--brand); color: var(--ink); }
 .font-display {
   font-family: var(--font-anton), Impact, sans-serif;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.02em;
   line-height: .95;
 }
 
