@@ -9,3 +9,20 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# ------------------------------------------------------------------
+# Cyber Essentials / Secure Configuration — baseline HTTP security headers.
+# Non-breaking set (no restrictive Permissions-Policy on camera/mic, no enforcing
+# CSP). Add a tuned Content-Security-Policy per app: start in Report-Only, review,
+# then promote. See docs/security/cyber-essentials.md.
+# ------------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Permissions-Policy = "interest-cohort=(), browsing-topics=()"
+    X-XSS-Protection = "0"
