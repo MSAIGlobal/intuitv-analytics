@@ -704,6 +704,60 @@ return (
           </Reveal>
         </div>
       </main>
+
+      {/* EU AI Act — Model Transparency (Article 53) */}
+      <footer
+        aria-label="EU AI Act transparency"
+        className="border-t-4"
+        style={{ backgroundColor: INK, borderColor: INK }}
+      >
+        <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div
+            className="pt-6 border-t"
+            style={{ borderColor: 'rgba(198,248,51,0.25)' }}
+          >
+            <p
+              className="text-xs font-semibold uppercase tracking-widest mb-3"
+              style={{ color: BRAND }}
+            >
+              EU AI Act — Model Transparency
+            </p>
+            <p className="text-sm leading-relaxed max-w-4xl mb-4 text-[rgba(246,246,241,0.6)]">
+              MOTHER CORE V2 &amp; V3 are open-weight general-purpose AI models. As their
+              provider, Media Stream AI publishes the documents required under Article 53 of
+              the EU AI Act (Regulation (EU) 2024/1689) — a copyright-compliance policy and a
+              public summary of training content — together with our full technology
+              due-diligence dossier:
+            </p>
+            <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+              <a
+                href="/downloads/MOTHER-EU-Copyright-Policy.pdf"
+                target="_blank"
+                rel="noopener"
+                className="transition-colors text-[rgba(246,246,241,0.6)] hover:text-[#C6F833]"
+              >
+                ↓ Copyright Policy — Art. 53(1)(c)
+              </a>
+              <a
+                href="/downloads/MOTHER-Training-Content-Summary.pdf"
+                target="_blank"
+                rel="noopener"
+                className="transition-colors text-[rgba(246,246,241,0.6)] hover:text-[#C6F833]"
+              >
+                ↓ Training-Content Summary — Art. 53(1)(d)
+              </a>
+              <a
+                href="/downloads/MOTHER-Technology-Due-Diligence.pdf"
+                target="_blank"
+                rel="noopener"
+                className="transition-colors text-[rgba(246,246,241,0.6)] hover:text-[#C6F833]"
+              >
+                ↓ Technology Due Diligence
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
