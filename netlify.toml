@@ -11,18 +11,20 @@
   status = 200
 
 # ------------------------------------------------------------------
-# Cyber Essentials / Secure Configuration — baseline HTTP security headers.
-# Non-breaking set (no restrictive Permissions-Policy on camera/mic, no enforcing
-# CSP). Add a tuned Content-Security-Policy per app: start in Report-Only, review,
-# then promote. See docs/security/cyber-essentials.md.
+# Secure Configuration — enforced HTTP security headers incl. a tuned
+# Content-Security-Policy. The dashboard is same-origin + the analytics API
+# (NEXT_PUBLIC_API_URL); no third-party script/media origins. object/frame/base/
+# form locked down.
 # ------------------------------------------------------------------
 [[headers]]
   for = "/*"
   [headers.values]
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     X-Content-Type-Options = "nosniff"
-    X-Frame-Options = "SAMEORIGIN"
+    X-Frame-Options = "DENY"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Cross-Origin-Opener-Policy = "same-origin"
-    Permissions-Policy = "interest-cohort=(), browsing-topics=()"
+    Cross-Origin-Resource-Policy = "same-site"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), usb=(), payment=(), interest-cohort=(), browsing-topics=()"
     X-XSS-Protection = "0"
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://api.intuitv.app; worker-src 'self' blob:; manifest-src 'self'; upgrade-insecure-requests"
