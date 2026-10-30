@@ -3,15 +3,34 @@
 @tailwind utilities;
 
 :root {
-  --brand: #C6F833;
-  --brand-bright: #D8FF5E;
-  --brand-deep: #9BD600;
+  /* IntuiTV design system — lime accent on charcoal (shared) */
+  --itv-bg: #171819; --itv-bg-secondary: #202123; --itv-bg-tertiary: #292A2D;
+  --itv-panel: #222325; --itv-panel-hover: #303135;
+  --itv-border: #383A3D; --itv-border-subtle: #2D2E31;
+  --itv-accent: #DFFF00; --itv-accent-hover: #EDFF59; --itv-accent-dark: #A9BF00;
+  --itv-text: #FFFFFF; --itv-text-secondary: #A9AAAD; --itv-text-muted: #74767A;
+  --itv-success: #64E6A3; --itv-warning: #FFBF47; --itv-danger: #FF6262; --itv-info: #65B9FF;
+
+  --brand: #DFFF00;
+  --brand-bright: #EDFF59;
+  --brand-deep: #A9BF00;
   --ink: #0A0A0A;
   --paper: #F6F6F1;
 }
 
 html { scroll-behavior: smooth; }
-body { margin: 0; padding: 0; background: var(--brand); color: var(--ink); }
+body {
+  margin: 0; padding: 0;
+  background: var(--itv-bg);
+  color: var(--itv-text);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--itv-accent); color: #171819; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--itv-panel-hover); border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: var(--itv-border); }
+*:focus-visible { outline: 2px solid var(--itv-accent); outline-offset: 2px; }
 
 .font-display {
   font-family: var(--font-anton), Impact, sans-serif;

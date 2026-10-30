@@ -40,9 +40,9 @@ export default function TimeSeriesCharts({ filters, refreshKey }: TimeSeriesChar
 
   if (loading) {
     return (
-      <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6">
+      <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6">
         <div className="h-96 flex items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#C6F833]"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#DFFF00]"></div>
         </div>
       </div>
     );
@@ -50,29 +50,29 @@ export default function TimeSeriesCharts({ filters, refreshKey }: TimeSeriesChar
 
   return (
     <Reveal>
-    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
+    <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 shadow-xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="font-display text-2xl font-bold text-[#C6F833] mb-1">Performance Over Time</h2>
+          <h2 className="font-display text-2xl font-bold text-[#DFFF00] mb-1">Performance Over Time</h2>
           <p className="text-[rgba(246,246,241,0.7)]">Views, watch time, and session activity</p>
         </div>
         <div className="flex gap-2">
           <button
             onClick={() => setInterval('hour')}
-            className={`px-4 py-2 rounded-lg border-2 border-[#0A0A0A] transition-all ${
+            className={`px-4 py-2 rounded-lg border-2 border-[#383A3D] transition-all ${
               interval === 'hour'
-                ? 'bg-[#0A0A0A] text-[#C6F833]'
-                : 'bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E]'
+                ? 'bg-[#222325] text-[#DFFF00]'
+                : 'bg-[#DFFF00] text-[#0A0A0A] hover:bg-[#EDFF59]'
             }`}
           >
             Hourly
           </button>
           <button
             onClick={() => setInterval('day')}
-            className={`px-4 py-2 rounded-lg border-2 border-[#0A0A0A] transition-all ${
+            className={`px-4 py-2 rounded-lg border-2 border-[#383A3D] transition-all ${
               interval === 'day'
-                ? 'bg-[#0A0A0A] text-[#C6F833]'
-                : 'bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E]'
+                ? 'bg-[#222325] text-[#DFFF00]'
+                : 'bg-[#DFFF00] text-[#0A0A0A] hover:bg-[#EDFF59]'
             }`}
           >
             Daily
@@ -82,13 +82,13 @@ export default function TimeSeriesCharts({ filters, refreshKey }: TimeSeriesChar
 
       {/* Views Over Time */}
       <div className="mb-8">
-        <h3 className="font-display text-lg font-semibold text-[#C6F833] mb-4">Views Over Time</h3>
+        <h3 className="font-display text-lg font-semibold text-[#DFFF00] mb-4">Views Over Time</h3>
         <ResponsiveContainer width="100%" height={300}>
           <AreaChart data={data}>
             <defs>
               <linearGradient id="colorViews" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#C6F833" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#C6F833" stopOpacity={0} />
+                <stop offset="5%" stopColor="#DFFF00" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#DFFF00" stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
@@ -101,8 +101,8 @@ export default function TimeSeriesCharts({ filters, refreshKey }: TimeSeriesChar
             <YAxis stroke="rgba(246,246,241,0.6)" style={{ fontSize: '12px' }} />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#0A0A0A',
-                border: '1px solid #C6F833',
+                backgroundColor: '#222325',
+                border: '1px solid #DFFF00',
                 borderRadius: '8px',
                 color: '#F6F6F1',
               }}
@@ -110,7 +110,7 @@ export default function TimeSeriesCharts({ filters, refreshKey }: TimeSeriesChar
             <Area
               type="monotone"
               dataKey="views"
-              stroke="#C6F833"
+              stroke="#DFFF00"
               fillOpacity={1}
               fill="url(#colorViews)"
             />
@@ -120,13 +120,13 @@ export default function TimeSeriesCharts({ filters, refreshKey }: TimeSeriesChar
 
       {/* Watch Time Over Time */}
       <div className="mb-8">
-        <h3 className="font-display text-lg font-semibold text-[#C6F833] mb-4">Watch Time Over Time (hours)</h3>
+        <h3 className="font-display text-lg font-semibold text-[#DFFF00] mb-4">Watch Time Over Time (hours)</h3>
         <ResponsiveContainer width="100%" height={300}>
           <AreaChart data={data}>
             <defs>
               <linearGradient id="colorWatchTime" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#D8FF5E" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#D8FF5E" stopOpacity={0} />
+                <stop offset="5%" stopColor="#EDFF59" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#EDFF59" stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
@@ -139,8 +139,8 @@ export default function TimeSeriesCharts({ filters, refreshKey }: TimeSeriesChar
             <YAxis stroke="rgba(246,246,241,0.6)" style={{ fontSize: '12px' }} />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#0A0A0A',
-                border: '1px solid #C6F833',
+                backgroundColor: '#222325',
+                border: '1px solid #DFFF00',
                 borderRadius: '8px',
                 color: '#F6F6F1',
               }}
@@ -148,7 +148,7 @@ export default function TimeSeriesCharts({ filters, refreshKey }: TimeSeriesChar
             <Area
               type="monotone"
               dataKey="watchTime"
-              stroke="#D8FF5E"
+              stroke="#EDFF59"
               fillOpacity={1}
               fill="url(#colorWatchTime)"
             />
@@ -158,7 +158,7 @@ export default function TimeSeriesCharts({ filters, refreshKey }: TimeSeriesChar
 
       {/* Session Starts vs Ends */}
       <div>
-        <h3 className="font-display text-lg font-semibold text-[#C6F833] mb-4">Session Activity</h3>
+        <h3 className="font-display text-lg font-semibold text-[#DFFF00] mb-4">Session Activity</h3>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={data}>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
@@ -171,8 +171,8 @@ export default function TimeSeriesCharts({ filters, refreshKey }: TimeSeriesChar
             <YAxis stroke="rgba(246,246,241,0.6)" style={{ fontSize: '12px' }} />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#0A0A0A',
-                border: '1px solid #C6F833',
+                backgroundColor: '#222325',
+                border: '1px solid #DFFF00',
                 borderRadius: '8px',
                 color: '#F6F6F1',
               }}
@@ -181,7 +181,7 @@ export default function TimeSeriesCharts({ filters, refreshKey }: TimeSeriesChar
             <Line
               type="monotone"
               dataKey="sessionStarts"
-              stroke="#C6F833"
+              stroke="#DFFF00"
               strokeWidth={2}
               dot={false}
               name="Session Starts"
@@ -189,7 +189,7 @@ export default function TimeSeriesCharts({ filters, refreshKey }: TimeSeriesChar
             <Line
               type="monotone"
               dataKey="sessionEnds"
-              stroke="#D8FF5E"
+              stroke="#EDFF59"
               strokeWidth={2}
               dot={false}
               name="Session Ends"

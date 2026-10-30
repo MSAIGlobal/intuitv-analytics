@@ -84,11 +84,11 @@ export default function KPIStrip({ filters, refreshKey }: KPIStripProps) {
         {[...Array(5)].map((_, i) => (
           <div
             key={i}
-            className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 animate-pulse"
+            className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 animate-pulse"
           >
-            <div className="h-12 bg-[rgba(198,248,51,0.12)] rounded mb-2"></div>
-            <div className="h-8 bg-[rgba(198,248,51,0.12)] rounded mb-2"></div>
-            <div className="h-4 bg-[rgba(198,248,51,0.12)] rounded w-1/2"></div>
+            <div className="h-12 bg-[rgba(223,255,0,0.12)] rounded mb-2"></div>
+            <div className="h-8 bg-[rgba(223,255,0,0.12)] rounded mb-2"></div>
+            <div className="h-4 bg-[rgba(223,255,0,0.12)] rounded w-1/2"></div>
           </div>
         ))}
       </div>
@@ -100,21 +100,21 @@ export default function KPIStrip({ filters, refreshKey }: KPIStripProps) {
       {kpis.map((kpi, index) => (
         <div
           key={index}
-          className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 hover:border-[#C6F833] transition-all shadow-xl"
+          className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 hover:border-[#DFFF00] transition-all shadow-xl"
         >
           <div className="flex items-start justify-between mb-4">
             <span className="text-3xl">{kpi.icon}</span>
             <span
               className={`text-xs px-2 py-1 rounded-full ${
                 kpi.trend === 'up'
-                  ? 'bg-[rgba(198,248,51,0.12)] text-[#C6F833]'
+                  ? 'bg-[rgba(223,255,0,0.12)] text-[#DFFF00]'
                   : 'bg-[rgba(246,246,241,0.12)] text-[#F6F6F1]'
               }`}
             >
               {kpi.change}
             </span>
           </div>
-          <div className="font-display text-3xl font-bold text-[#C6F833] mb-1">{kpi.value}</div>
+          <div className="font-display text-3xl font-bold text-[#DFFF00] mb-1">{kpi.value}</div>
           <div className="text-sm text-[rgba(246,246,241,0.7)]">{kpi.label}</div>
         </div>
       ))}

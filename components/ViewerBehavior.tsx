@@ -31,9 +31,9 @@ export default function ViewerBehavior({ filters, refreshKey }: ViewerBehaviorPr
 
   if (loading || !behavior) {
     return (
-      <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6">
+      <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6">
         <div className="h-64 flex items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#C6F833]"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#DFFF00]"></div>
         </div>
       </div>
     );
@@ -45,21 +45,21 @@ export default function ViewerBehavior({ filters, refreshKey }: ViewerBehaviorPr
       value: behavior.completionRate,
       format: 'percent',
       icon: '✅',
-      color: 'bg-[#C6F833] text-[#0A0A0A]',
+      color: 'bg-[#DFFF00] text-[#0A0A0A]',
     },
     {
       label: 'Drop-off Rate',
       value: behavior.dropoffRate,
       format: 'percent',
       icon: '⚠️',
-      color: 'bg-[#D8FF5E] text-[#0A0A0A]',
+      color: 'bg-[#EDFF59] text-[#0A0A0A]',
     },
     {
       label: 'Avg Watch Time',
       value: behavior.avgWatchTimePerContent,
       format: 'minutes',
       icon: '⏱️',
-      color: 'bg-[#9BD600] text-[#0A0A0A]',
+      color: 'bg-[#A9BF00] text-[#0A0A0A]',
     },
     {
       label: 'Repeat Frequency',
@@ -71,9 +71,9 @@ export default function ViewerBehavior({ filters, refreshKey }: ViewerBehaviorPr
   ];
 
   return (
-    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
+    <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 shadow-xl">
       <div className="mb-6">
-        <h2 className="font-display text-2xl font-bold text-[#C6F833] mb-1">Viewer Behavior Analytics</h2>
+        <h2 className="font-display text-2xl font-bold text-[#DFFF00] mb-1">Viewer Behavior Analytics</h2>
         <p className="text-[rgba(246,246,241,0.7)]">Engagement patterns and content performance</p>
       </div>
 
@@ -81,7 +81,7 @@ export default function ViewerBehavior({ filters, refreshKey }: ViewerBehaviorPr
         {metrics.map((metric) => (
           <div
             key={metric.label}
-            className="bg-[rgba(198,248,51,0.12)] rounded-lg p-6 hover:bg-[rgba(198,248,51,0.2)] transition-all"
+            className="bg-[rgba(223,255,0,0.12)] rounded-lg p-6 hover:bg-[rgba(223,255,0,0.2)] transition-all"
           >
             <div className="flex items-start justify-between mb-4">
               <span className="text-3xl">{metric.icon}</span>
@@ -103,12 +103,12 @@ export default function ViewerBehavior({ filters, refreshKey }: ViewerBehaviorPr
       {/* Top Drop-off Points */}
       {behavior.topDropoffPoints && behavior.topDropoffPoints.length > 0 && (
         <div>
-          <h3 className="font-display text-lg font-semibold text-[#C6F833] mb-4">Top Drop-off Points</h3>
+          <h3 className="font-display text-lg font-semibold text-[#DFFF00] mb-4">Top Drop-off Points</h3>
           <div className="space-y-3">
             {behavior.topDropoffPoints.map((point) => (
               <div
                 key={point.contentId}
-                className="flex items-center gap-4 p-4 bg-[rgba(198,248,51,0.12)] rounded-lg hover:bg-[rgba(198,248,51,0.2)] transition-all"
+                className="flex items-center gap-4 p-4 bg-[rgba(223,255,0,0.12)] rounded-lg hover:bg-[rgba(223,255,0,0.2)] transition-all"
               >
                 <div className="flex-1">
                   <div className="text-[#F6F6F1] font-semibold">{point.contentTitle}</div>
@@ -117,7 +117,7 @@ export default function ViewerBehavior({ filters, refreshKey }: ViewerBehaviorPr
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-[#C6F833] font-bold">
+                  <div className="text-[#DFFF00] font-bold">
                     {point.dropoffPercentage.toFixed(1)}%
                   </div>
                   <div className="text-xs text-[rgba(246,246,241,0.7)]">drop-off</div>
