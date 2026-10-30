@@ -17,13 +17,13 @@ import {
 import { analyticsClient, ContentStats } from '@/shared/api/analyticsClient';
 import Reveal from './Reveal';
 
-const BRAND = '#C6F833';
-const BRAND_BRIGHT = '#D8FF5E';
+const BRAND = '#DFFF00';
+const BRAND_BRIGHT = '#EDFF59';
 const INK = '#0A0A0A';
 const PAPER = '#F6F6F1';
 
 const TOOLTIP_STYLE = {
-  backgroundColor: INK,
+  backgroundColor: '#222325',
   border: `2px solid ${BRAND}`,
   borderRadius: '8px',
   color: PAPER,
@@ -61,7 +61,7 @@ export const ContentPerformance: React.FC<ContentPerformanceProps> = ({
   if (loading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#C6F833]"></div>
+        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#DFFF00]"></div>
       </div>
     );
   }
@@ -86,7 +86,7 @@ export const ContentPerformance: React.FC<ContentPerformanceProps> = ({
       <Reveal>
         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
           <div>
-            <h2 className="font-display text-2xl sm:text-3xl text-[#0A0A0A]">
+            <h2 className="font-display text-2xl sm:text-3xl text-[#FFFFFF]">
               Content Performance Analytics
             </h2>
             <p className="text-sm text-[rgba(10,10,10,0.65)]">
@@ -100,10 +100,10 @@ export const ContentPerformance: React.FC<ContentPerformanceProps> = ({
               <button
                 key={tf}
                 onClick={() => setSelectedTimeframe(tf as any)}
-                className={`px-4 py-2 rounded-lg font-bold border-2 border-[#0A0A0A] transition-all hover:scale-105 ${
+                className={`px-4 py-2 rounded-lg font-bold border-2 border-[#383A3D] transition-all hover:scale-105 ${
                   selectedTimeframe === tf
-                    ? 'bg-[#0A0A0A] text-[#C6F833]'
-                    : 'bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E]'
+                    ? 'bg-[#222325] text-[#DFFF00]'
+                    : 'bg-[#DFFF00] text-[#0A0A0A] hover:bg-[#EDFF59]'
                 }`}
               >
                 {tf === '24h' ? '24 Hours' :
@@ -132,8 +132,8 @@ export const ContentPerformance: React.FC<ContentPerformanceProps> = ({
 
       {/* Views Over Time Chart */}
       <Reveal>
-        <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
-          <h3 className="font-display text-2xl text-[#C6F833] mb-4">Views Over Time</h3>
+        <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 shadow-xl">
+          <h3 className="font-display text-2xl text-[#DFFF00] mb-4">Views Over Time</h3>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={stats}>
               <defs>
@@ -162,8 +162,8 @@ export const ContentPerformance: React.FC<ContentPerformanceProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Engagement Over Time */}
         <Reveal>
-          <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
-            <h3 className="font-display text-2xl text-[#C6F833] mb-4">Engagement Rate</h3>
+          <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 shadow-xl">
+            <h3 className="font-display text-2xl text-[#DFFF00] mb-4">Engagement Rate</h3>
             <ResponsiveContainer width="100%" height={250}>
               <LineChart data={stats}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
@@ -187,15 +187,15 @@ export const ContentPerformance: React.FC<ContentPerformanceProps> = ({
 
         {/* Watch Time Analysis */}
         <Reveal delay={80}>
-          <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
-            <h3 className="font-display text-2xl text-[#C6F833] mb-4">Average Watch Time</h3>
+          <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 shadow-xl">
+            <h3 className="font-display text-2xl text-[#DFFF00] mb-4">Average Watch Time</h3>
             <ResponsiveContainer width="100%" height={250}>
               <BarChart data={stats}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
                 <XAxis dataKey="date" stroke="rgba(246,246,241,0.6)" />
                 <YAxis stroke="rgba(246,246,241,0.6)" />
                 <Tooltip
-                  cursor={{ fill: 'rgba(198,248,51,0.12)' }}
+                  cursor={{ fill: 'rgba(223,255,0,0.12)' }}
                   contentStyle={TOOLTIP_STYLE}
                   formatter={(value: any) => `${value.toFixed(1)}m`}
                 />
@@ -208,8 +208,8 @@ export const ContentPerformance: React.FC<ContentPerformanceProps> = ({
 
       {/* Completion Rate Chart */}
       <Reveal>
-        <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
-          <h3 className="font-display text-2xl text-[#C6F833] mb-4">Completion Rate Trend</h3>
+        <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 shadow-xl">
+          <h3 className="font-display text-2xl text-[#DFFF00] mb-4">Completion Rate Trend</h3>
           <ResponsiveContainer width="100%" height={200}>
             <LineChart data={stats}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
@@ -240,16 +240,16 @@ const StatCard: React.FC<{
   icon: string;
   trend?: string;
 }> = ({ title, value, icon, trend }) => (
-  <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl hover:border-[#C6F833] transition-all">
+  <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 shadow-xl hover:border-[#DFFF00] transition-all">
     <div className="flex items-center justify-between mb-2">
       <p className="text-sm text-[rgba(246,246,241,0.7)]">{title}</p>
       <span className="text-2xl">{icon}</span>
     </div>
     <div className="flex items-end justify-between">
-      <p className="font-display text-3xl text-[#C6F833]">{value}</p>
+      <p className="font-display text-3xl text-[#DFFF00]">{value}</p>
       {trend && (
         <span className={`text-sm font-bold ${
-          trend.startsWith('+') ? 'text-[#C6F833]' : 'text-[#D8FF5E]'
+          trend.startsWith('+') ? 'text-[#DFFF00]' : 'text-[#EDFF59]'
         }`}>
           {trend}
         </span>

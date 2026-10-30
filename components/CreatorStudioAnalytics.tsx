@@ -43,10 +43,10 @@ export default function CreatorStudioAnalytics({ filters, refreshKey }: CreatorS
   };
 
   return (
-    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
+    <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 shadow-xl">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-          <h2 className="font-display text-xl sm:text-2xl font-bold text-[#C6F833] mb-1">
+          <h2 className="font-display text-xl sm:text-2xl font-bold text-[#DFFF00] mb-1">
             {view === 'creators' ? 'Creator' : 'Studio'} Analytics
           </h2>
           <p className="text-[rgba(246,246,241,0.7)]">Performance by creator and studio</p>
@@ -54,20 +54,20 @@ export default function CreatorStudioAnalytics({ filters, refreshKey }: CreatorS
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setView('creators')}
-            className={`px-4 py-2 rounded-lg border-2 border-[#0A0A0A] transition-all ${
+            className={`px-4 py-2 rounded-lg border-2 border-[#383A3D] transition-all ${
               view === 'creators'
-                ? 'bg-[#0A0A0A] text-[#C6F833]'
-                : 'bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E]'
+                ? 'bg-[#222325] text-[#DFFF00]'
+                : 'bg-[#DFFF00] text-[#0A0A0A] hover:bg-[#EDFF59]'
             }`}
           >
             Creators
           </button>
           <button
             onClick={() => setView('studios')}
-            className={`px-4 py-2 rounded-lg border-2 border-[#0A0A0A] transition-all ${
+            className={`px-4 py-2 rounded-lg border-2 border-[#383A3D] transition-all ${
               view === 'studios'
-                ? 'bg-[#0A0A0A] text-[#C6F833]'
-                : 'bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E]'
+                ? 'bg-[#222325] text-[#DFFF00]'
+                : 'bg-[#DFFF00] text-[#0A0A0A] hover:bg-[#EDFF59]'
             }`}
           >
             Studios
@@ -78,7 +78,7 @@ export default function CreatorStudioAnalytics({ filters, refreshKey }: CreatorS
       {loading ? (
         <div className="space-y-4">
           {[...Array(10)].map((_, i) => (
-            <div key={i} className="h-24 bg-[rgba(198,248,51,0.12)] rounded-lg animate-pulse"></div>
+            <div key={i} className="h-24 bg-[rgba(223,255,0,0.12)] rounded-lg animate-pulse"></div>
           ))}
         </div>
       ) : view === 'creators' ? (
@@ -86,11 +86,11 @@ export default function CreatorStudioAnalytics({ filters, refreshKey }: CreatorS
           {creators.map((creator, index) => (
             <div
               key={creator.creatorId}
-              className="p-4 bg-[rgba(198,248,51,0.12)] rounded-lg hover:bg-[rgba(198,248,51,0.2)] transition-all"
+              className="p-4 bg-[rgba(223,255,0,0.12)] rounded-lg hover:bg-[rgba(223,255,0,0.2)] transition-all"
             >
               <div className="flex items-start gap-4">
                 {/* Rank */}
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#C6F833] text-[#0A0A0A] flex items-center justify-center font-bold">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#DFFF00] text-[#0A0A0A] flex items-center justify-center font-bold">
                   {index + 1}
                 </div>
 
@@ -116,7 +116,7 @@ export default function CreatorStudioAnalytics({ filters, refreshKey }: CreatorS
                       <div className="text-[rgba(246,246,241,0.7)]">Growth</div>
                       <div
                         className={`font-semibold ${
-                          creator.channelGrowth >= 0 ? 'text-[#C6F833]' : 'text-[#F6F6F1]'
+                          creator.channelGrowth >= 0 ? 'text-[#DFFF00]' : 'text-[#F6F6F1]'
                         }`}
                       >
                         {creator.channelGrowth >= 0 ? '+' : ''}
@@ -134,14 +134,14 @@ export default function CreatorStudioAnalytics({ filters, refreshKey }: CreatorS
                   {/* AI vs Uploaded Content */}
                   <div className="mt-3 flex items-center gap-4 text-sm">
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-[#C6F833]"></div>
+                      <div className="w-3 h-3 rounded-full bg-[#DFFF00]"></div>
                       <span className="text-[rgba(246,246,241,0.7)]">AI Generated:</span>
                       <span className="text-[#F6F6F1] font-semibold">
                         {creator.aiGeneratedContent}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-[#D8FF5E]"></div>
+                      <div className="w-3 h-3 rounded-full bg-[#EDFF59]"></div>
                       <span className="text-[rgba(246,246,241,0.7)]">Uploaded:</span>
                       <span className="text-[#F6F6F1] font-semibold">
                         {creator.uploadedContent}
@@ -158,10 +158,10 @@ export default function CreatorStudioAnalytics({ filters, refreshKey }: CreatorS
           {studios.map((studio, index) => (
             <div
               key={studio.studioId}
-              className="p-4 bg-[rgba(198,248,51,0.12)] rounded-lg hover:bg-[rgba(198,248,51,0.2)] transition-all"
+              className="p-4 bg-[rgba(223,255,0,0.12)] rounded-lg hover:bg-[rgba(223,255,0,0.2)] transition-all"
             >
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#9BD600] text-[#0A0A0A] flex items-center justify-center font-bold">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#A9BF00] text-[#0A0A0A] flex items-center justify-center font-bold">
                   {index + 1}
                 </div>
 

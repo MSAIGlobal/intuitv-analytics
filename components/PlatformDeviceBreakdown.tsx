@@ -6,9 +6,9 @@ import { analyticsClient } from '../lib/analyticsClient';
 import { PlatformBreakdown, AnalyticsFilters } from '../lib/types';
 import Reveal from './Reveal';
 
-const BRAND = '#C6F833';
-const BRAND_BRIGHT = '#D8FF5E';
-const BRAND_DEEP = '#9BD600';
+const BRAND = '#DFFF00';
+const BRAND_BRIGHT = '#EDFF59';
+const BRAND_DEEP = '#A9BF00';
 const INK = '#0A0A0A';
 const PAPER = '#F6F6F1';
 
@@ -60,21 +60,21 @@ export default function PlatformDeviceBreakdown({ filters, refreshKey }: Platfor
 
   return (
     <Reveal>
-      <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
+      <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 shadow-xl">
         <div className="mb-6">
-          <h2 className="font-display text-2xl text-[#C6F833] mb-1">Platform & Device Analytics</h2>
+          <h2 className="font-display text-2xl text-[#DFFF00] mb-1">Platform & Device Analytics</h2>
           <p className="text-[rgba(246,246,241,0.7)]">TV, Mobile, and Web distribution</p>
         </div>
 
         {loading ? (
           <div className="h-96 flex items-center justify-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#C6F833]"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#DFFF00]"></div>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Platform Distribution Pie Chart */}
             <div>
-              <h3 className="font-display text-lg text-[#C6F833] mb-4">Platform Distribution</h3>
+              <h3 className="font-display text-lg text-[#DFFF00] mb-4">Platform Distribution</h3>
               <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
                   <Pie
@@ -100,7 +100,7 @@ export default function PlatformDeviceBreakdown({ filters, refreshKey }: Platfor
                   </Pie>
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: INK,
+                      backgroundColor: '#222325',
                       border: `2px solid ${BRAND}`,
                       borderRadius: '8px',
                       color: PAPER,
@@ -117,8 +117,8 @@ export default function PlatformDeviceBreakdown({ filters, refreshKey }: Platfor
                     onClick={() => setSelectedPlatform(platform.platform)}
                     className={`p-4 rounded-lg border-2 transition-all hover:scale-105 ${
                       selectedPlatform === platform.platform
-                        ? 'bg-[#C6F833] border-[#0A0A0A] text-[#0A0A0A]'
-                        : 'bg-[rgba(198,248,51,0.12)] border-transparent hover:bg-[rgba(198,248,51,0.2)] text-[#F6F6F1]'
+                        ? 'bg-[#DFFF00] border-[#383A3D] text-[#0A0A0A]'
+                        : 'bg-[rgba(223,255,0,0.12)] border-transparent hover:bg-[rgba(223,255,0,0.2)] text-[#F6F6F1]'
                     }`}
                   >
                     <div className={`text-sm uppercase mb-1 ${
@@ -139,7 +139,7 @@ export default function PlatformDeviceBreakdown({ filters, refreshKey }: Platfor
 
             {/* Device Breakdown for Selected Platform */}
             <div>
-              <h3 className="font-display text-lg text-[#C6F833] mb-4">
+              <h3 className="font-display text-lg text-[#DFFF00] mb-4">
                 {selectedPlatform.toUpperCase()} Devices
               </h3>
               {selectedPlatformData && (
@@ -147,7 +147,7 @@ export default function PlatformDeviceBreakdown({ filters, refreshKey }: Platfor
                   {selectedPlatformData.devices.map((device) => (
                     <div
                       key={device.deviceType}
-                      className="p-4 bg-[rgba(198,248,51,0.12)] rounded-lg hover:bg-[rgba(198,248,51,0.2)] transition-all"
+                      className="p-4 bg-[rgba(223,255,0,0.12)] rounded-lg hover:bg-[rgba(223,255,0,0.2)] transition-all"
                     >
                       <div className="flex items-center justify-between mb-2">
                         <div>
@@ -159,7 +159,7 @@ export default function PlatformDeviceBreakdown({ filters, refreshKey }: Platfor
                           )}
                         </div>
                         <div className="text-right">
-                          <div className="text-[#C6F833] font-bold">
+                          <div className="text-[#DFFF00] font-bold">
                             {formatNumber(device.count)}
                           </div>
                           <div className="text-xs text-[rgba(246,246,241,0.7)]">viewers</div>
@@ -170,7 +170,7 @@ export default function PlatformDeviceBreakdown({ filters, refreshKey }: Platfor
                       <div className="mb-2">
                         <div className="h-2 bg-[rgba(246,246,241,0.2)] rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-[#C6F833]"
+                            className="h-full bg-[#DFFF00]"
                             style={{
                               width: `${
                                 (device.count /

@@ -27,7 +27,7 @@ export const RealTimeMetrics: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <div className="animate-pulse text-[#0A0A0A] font-display">Loading metrics...</div>;
+    return <div className="animate-pulse text-[#F6F6F1] font-display">Loading metrics...</div>;
   }
 
   if (!metrics || metrics.length === 0) {
@@ -58,19 +58,19 @@ const MetricCard: React.FC<{
 }> = ({ title, value, status, change }) => {
   // status dot colors mapped onto the lime/ink system
   const statusColors = {
-    good: 'bg-[#C6F833]',
-    warning: 'bg-[#D8FF5E]',
+    good: 'bg-[#DFFF00]',
+    warning: 'bg-[#EDFF59]',
     critical: 'bg-[#F6F6F1]',
   };
 
   return (
-    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl hover:border-[#C6F833] transition-all">
+    <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 shadow-xl hover:border-[#DFFF00] transition-all">
       <div className="flex items-center justify-between">
         <div className="flex-1">
           <p className="text-sm text-[rgba(246,246,241,0.7)]">{title}</p>
-          <p className="font-display text-3xl text-[#C6F833] mt-2">{value}</p>
+          <p className="font-display text-3xl text-[#DFFF00] mt-2">{value}</p>
           {change !== undefined && (
-            <p className={`text-sm mt-1 font-bold ${change >= 0 ? 'text-[#C6F833]' : 'text-[#D8FF5E]'}`}>
+            <p className={`text-sm mt-1 font-bold ${change >= 0 ? 'text-[#DFFF00]' : 'text-[#EDFF59]'}`}>
               {change >= 0 ? '+' : ''}{change.toFixed(1)}%
             </p>
           )}

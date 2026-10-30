@@ -31,12 +31,12 @@ export default function GlobalFilters({ filters, onFilterChange }: GlobalFilters
   };
 
   return (
-    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
+    <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 shadow-xl">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="font-display text-lg font-semibold text-[#C6F833]">Filters</h3>
+        <h3 className="font-display text-lg font-semibold text-[#DFFF00]">Filters</h3>
         <button
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="text-[#C6F833] hover:text-[#D8FF5E] transition-colors text-sm flex items-center gap-2"
+          className="text-[#DFFF00] hover:text-[#EDFF59] transition-colors text-sm flex items-center gap-2"
         >
           {showAdvanced ? 'Hide' : 'Show'} Advanced
           <svg
@@ -58,7 +58,7 @@ export default function GlobalFilters({ filters, onFilterChange }: GlobalFilters
             <button
               key={range.label}
               onClick={() => handleQuickDate(range.days)}
-              className="px-4 py-2 bg-[#C6F833] text-[#0A0A0A] border-2 border-[#0A0A0A] rounded-lg hover:bg-[#D8FF5E] transition-all"
+              className="px-4 py-2 bg-[#DFFF00] text-[#0A0A0A] border-2 border-[#383A3D] rounded-lg hover:bg-[#EDFF59] transition-all"
             >
               {range.label}
             </button>
@@ -73,7 +73,7 @@ export default function GlobalFilters({ filters, onFilterChange }: GlobalFilters
           <div>
             <label className="text-sm text-[rgba(246,246,241,0.7)] mb-2 block">Platform</label>
             <select
-              className="w-full px-4 py-2 bg-[rgba(198,248,51,0.12)] text-[#F6F6F1] rounded-lg border-2 border-[rgba(246,246,241,0.2)] focus:border-[#C6F833] focus:outline-none"
+              className="w-full px-4 py-2 bg-[rgba(223,255,0,0.12)] text-[#F6F6F1] rounded-lg border-2 border-[rgba(246,246,241,0.2)] focus:border-[#DFFF00] focus:outline-none"
               onChange={(e) => {
                 const value = e.target.value;
                 onFilterChange({
@@ -94,7 +94,7 @@ export default function GlobalFilters({ filters, onFilterChange }: GlobalFilters
           <div>
             <label className="text-sm text-[rgba(246,246,241,0.7)] mb-2 block">Country</label>
             <select
-              className="w-full px-4 py-2 bg-[rgba(198,248,51,0.12)] text-[#F6F6F1] rounded-lg border-2 border-[rgba(246,246,241,0.2)] focus:border-[#C6F833] focus:outline-none"
+              className="w-full px-4 py-2 bg-[rgba(223,255,0,0.12)] text-[#F6F6F1] rounded-lg border-2 border-[rgba(246,246,241,0.2)] focus:border-[#DFFF00] focus:outline-none"
               onChange={(e) => {
                 const value = e.target.value;
                 onFilterChange({
@@ -127,7 +127,7 @@ export default function GlobalFilters({ filters, onFilterChange }: GlobalFilters
                   studioIds: undefined,
                 });
               }}
-              className="w-full px-4 py-2 bg-[#0A0A0A] text-[#C6F833] border-2 border-[#C6F833] rounded-lg hover:bg-[rgba(198,248,51,0.12)] transition-all"
+              className="w-full px-4 py-2 bg-[#222325] text-[#DFFF00] border-2 border-[#DFFF00] rounded-lg hover:bg-[rgba(223,255,0,0.12)] transition-all"
             >
               Clear All
             </button>

@@ -21,13 +21,13 @@ import {
 import { analyticsClient } from '@/shared/api/analyticsClient';
 import Reveal from './Reveal';
 
-const BRAND = '#C6F833';
-const BRAND_BRIGHT = '#D8FF5E';
+const BRAND = '#DFFF00';
+const BRAND_BRIGHT = '#EDFF59';
 const INK = '#0A0A0A';
 const PAPER = '#F6F6F1';
 
 const TOOLTIP_STYLE = {
-  backgroundColor: INK,
+  backgroundColor: '#222325',
   border: `2px solid ${BRAND}`,
   borderRadius: '8px',
   color: PAPER,
@@ -57,7 +57,7 @@ export const EngagementCharts: React.FC = () => {
   if (loading || !overview) {
     return (
       <div className="flex items-center justify-center h-96">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#C6F833]"></div>
+        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#DFFF00]"></div>
       </div>
     );
   }
@@ -83,7 +83,7 @@ export const EngagementCharts: React.FC = () => {
       {/* Timeframe Selector */}
       <Reveal>
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-          <h2 className="font-display text-2xl sm:text-3xl text-[#0A0A0A]">
+          <h2 className="font-display text-2xl sm:text-3xl text-[#F6F6F1]">
             Engagement Analytics
           </h2>
           <div className="flex flex-wrap gap-2">
@@ -91,10 +91,10 @@ export const EngagementCharts: React.FC = () => {
               <button
                 key={tf}
                 onClick={() => setTimeframe(tf as any)}
-                className={`px-4 py-2 rounded-lg font-bold border-2 border-[#0A0A0A] transition-all hover:scale-105 ${
+                className={`px-4 py-2 rounded-lg font-bold border-2 border-[#383A3D] transition-all hover:scale-105 ${
                   timeframe === tf
-                    ? 'bg-[#0A0A0A] text-[#C6F833]'
-                    : 'bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E]'
+                    ? 'bg-[#222325] text-[#DFFF00]'
+                    : 'bg-[#DFFF00] text-[#0A0A0A] hover:bg-[#EDFF59]'
                 }`}
               >
                 {tf === '24h' ? '24 Hours' : tf === '7d' ? '7 Days' : '30 Days'}
@@ -106,8 +106,8 @@ export const EngagementCharts: React.FC = () => {
 
       {/* Hourly Engagement Chart */}
       <Reveal>
-        <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
-          <h3 className="font-display text-2xl text-[#C6F833] mb-4">Hourly Activity</h3>
+        <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 shadow-xl">
+          <h3 className="font-display text-2xl text-[#DFFF00] mb-4">Hourly Activity</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={overview.hourly_data}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
@@ -143,14 +143,14 @@ export const EngagementCharts: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Device Distribution */}
         <Reveal>
-          <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
-            <h3 className="font-display text-2xl text-[#C6F833] mb-4">Viewers by Device</h3>
+          <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 shadow-xl">
+            <h3 className="font-display text-2xl text-[#DFFF00] mb-4">Viewers by Device</h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={deviceData} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
                 <XAxis type="number" stroke="rgba(246,246,241,0.6)" />
                 <YAxis dataKey="device" type="category" stroke="rgba(246,246,241,0.6)" width={100} />
-                <Tooltip cursor={{ fill: 'rgba(198,248,51,0.12)' }} contentStyle={TOOLTIP_STYLE} />
+                <Tooltip cursor={{ fill: 'rgba(223,255,0,0.12)' }} contentStyle={TOOLTIP_STYLE} />
                 <Bar dataKey="viewers" fill={BRAND} radius={[0, 8, 8, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -159,14 +159,14 @@ export const EngagementCharts: React.FC = () => {
 
         {/* Platform Distribution */}
         <Reveal delay={80}>
-          <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
-            <h3 className="font-display text-2xl text-[#C6F833] mb-4">Viewers by Platform</h3>
+          <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 shadow-xl">
+            <h3 className="font-display text-2xl text-[#DFFF00] mb-4">Viewers by Platform</h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={platformData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(246,246,241,0.12)" />
                 <XAxis dataKey="platform" stroke="rgba(246,246,241,0.6)" angle={-45} textAnchor="end" height={100} />
                 <YAxis stroke="rgba(246,246,241,0.6)" />
-                <Tooltip cursor={{ fill: 'rgba(198,248,51,0.12)' }} contentStyle={TOOLTIP_STYLE} />
+                <Tooltip cursor={{ fill: 'rgba(223,255,0,0.12)' }} contentStyle={TOOLTIP_STYLE} />
                 <Bar dataKey="viewers" fill={BRAND_BRIGHT} radius={[8, 8, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -176,8 +176,8 @@ export const EngagementCharts: React.FC = () => {
 
       {/* Event Type Distribution */}
       <Reveal>
-        <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
-          <h3 className="font-display text-2xl text-[#C6F833] mb-4">Event Distribution</h3>
+        <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 shadow-xl">
+          <h3 className="font-display text-2xl text-[#DFFF00] mb-4">Event Distribution</h3>
           <ResponsiveContainer width="100%" height={350}>
             <RadarChart data={engagementByType}>
               <PolarGrid stroke="rgba(246,246,241,0.2)" />
@@ -219,12 +219,12 @@ const MetricCard: React.FC<{
   change: string;
   positive: boolean;
 }> = ({ title, value, change, positive }) => (
-  <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl hover:border-[#C6F833] transition-all">
+  <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 shadow-xl hover:border-[#DFFF00] transition-all">
     <p className="text-sm text-[rgba(246,246,241,0.7)] mb-1">{title}</p>
     <div className="flex items-baseline justify-between">
-      <p className="font-display text-2xl text-[#C6F833]">{value}</p>
+      <p className="font-display text-2xl text-[#DFFF00]">{value}</p>
       <span className={`text-sm font-bold ${
-        positive ? 'text-[#C6F833]' : 'text-[#D8FF5E]'
+        positive ? 'text-[#DFFF00]' : 'text-[#EDFF59]'
       }`}>
         {change}
       </span>

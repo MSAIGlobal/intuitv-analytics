@@ -34,16 +34,16 @@ import Reveal from '../components/Reveal'
    BRAND PALETTE — IntuiTV "BUILT DIFFERENT"
 ============================================================================ */
 
-const BRAND = '#C6F833'        // neon lime
-const BRAND_BRIGHT = '#D8FF5E' // lime bright
-const BRAND_DEEP = '#9BD600'   // lime deep
+const BRAND = '#DFFF00'        // neon lime
+const BRAND_BRIGHT = '#EDFF59' // lime bright
+const BRAND_DEEP = '#A9BF00'   // lime deep
 const INK = '#0A0A0A'          // chunky black
 const PAPER = '#F6F6F1'        // off-white
-const INK_SOFT = '#3A3A33'     // muted ink for secondary text on lime
-const LIME_FILL = 'rgba(198,248,51,0.12)' // subtle lime fill on black
+const INK_SOFT = '#A9AAAD'     // muted ink for secondary text on lime
+const LIME_FILL = 'rgba(223,255,0,0.12)' // subtle lime fill on black
 
 // Categorical accents for charts/legends — kept legible on ink surfaces
-const ACCENTS = [BRAND, BRAND_BRIGHT, PAPER, BRAND_DEEP, '#7AAB00', '#EAFFB0']
+const ACCENTS = [BRAND, BRAND_BRIGHT, PAPER, BRAND_DEEP, '#A9BF00', '#EAFFB0']
 
 /* ============================================================================
    TYPES
@@ -312,22 +312,22 @@ export default function AnalyticsDashboard() {
 
   if (loading && !overview.totalViews) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: BRAND }}>
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#171819' }}>
         <div className="text-center">
           <div className="w-16 h-16 border-4 rounded-full animate-spin mx-auto mb-4"
-               style={{ borderColor: INK, borderTopColor: 'transparent' }} />
-          <p className="font-display text-2xl" style={{ color: INK }}>Loading analytics…</p>
+               style={{ borderColor: '#383A3D', borderTopColor: 'transparent' }} />
+          <p className="font-display text-2xl" style={{ color: '#FFFFFF' }}>Loading analytics…</p>
         </div>
       </div>
     )
   }
 
 return (
-  <div className="min-h-screen" style={{ backgroundColor: BRAND }}>
+  <div className="min-h-screen" style={{ backgroundColor: '#171819' }}>
     {/* Header */}
     <header
       className="sticky top-0 z-50 border-b-4"
-      style={{ backgroundColor: BRAND, borderColor: INK }}
+      style={{ backgroundColor: '#171819', borderColor: '#383A3D' }}
     >
       <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex flex-wrap items-center justify-between gap-3">
 
@@ -336,7 +336,7 @@ return (
           href="https://mother.mediastreamai.com"
           className="flex items-center gap-3 sm:gap-4 transition-transform hover:scale-[1.02] min-w-0"
         >
-          <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-lg overflow-hidden border-2" style={{ borderColor: INK, backgroundColor: INK }}>
+          <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-lg overflow-hidden border-2" style={{ borderColor: '#383A3D', backgroundColor: '#222325' }}>
             <Image
               src="/logo_icon.png"
               alt="MOTHER"
@@ -346,9 +346,9 @@ return (
             />
           </div>
 
-          <div className="hidden sm:block h-8 w-1 shrink-0" style={{ backgroundColor: INK }} />
+          <div className="hidden sm:block h-8 w-1 shrink-0" style={{ backgroundColor: '#222325' }} />
 
-          <h1 className="font-display text-xl sm:text-2xl md:text-3xl truncate" style={{ color: INK }}>
+          <h1 className="font-display text-xl sm:text-2xl md:text-3xl truncate" style={{ color: '#FFFFFF' }}>
             Analytics Dashboard
           </h1>
         </a>
@@ -369,8 +369,8 @@ return (
                 style={{
                   backgroundColor: PAPER,
                   borderWidth: '2px',
-                  borderColor: INK,
-                  color: INK,
+                  borderColor: '#383A3D',
+                  color: '#FFFFFF',
                 }}
               />
             </div>
@@ -378,7 +378,7 @@ return (
             <button
               aria-label="Notifications"
               className="relative shrink-0 p-2.5 rounded-lg border-2 transition-all hover:scale-105"
-              style={{ backgroundColor: INK, borderColor: INK, color: BRAND }}
+              style={{ backgroundColor: '#222325', borderColor: '#383A3D', color: BRAND }}
             >
               <Bell className="w-5 h-5" style={{ color: BRAND }} />
               {errorMetrics.critical > 0 && (
@@ -386,8 +386,8 @@ return (
                   className="absolute -top-1 -right-1 w-5 h-5 rounded-full text-xs font-bold flex items-center justify-center border-2"
                   style={{
                     backgroundColor: BRAND_BRIGHT,
-                    color: INK,
-                    borderColor: INK,
+                    color: '#171819',
+                    borderColor: '#383A3D',
                   }}
                 >
                   {errorMetrics.critical}
@@ -400,7 +400,7 @@ return (
               disabled={refreshing}
               aria-label="Refresh"
               className="shrink-0 p-2.5 rounded-lg border-2 transition-all hover:scale-105 disabled:opacity-50"
-              style={{ backgroundColor: INK, borderColor: INK, color: BRAND }}
+              style={{ backgroundColor: '#222325', borderColor: '#383A3D', color: BRAND }}
             >
               <RefreshCw
                 className={`w-5 h-5 ${refreshing ? 'animate-spin' : ''}`}
@@ -412,7 +412,7 @@ return (
       </header>
 
       {/* Marquee banner */}
-      <div className="overflow-hidden border-b-4" style={{ backgroundColor: INK, borderColor: INK }}>
+      <div className="overflow-hidden border-b-4" style={{ backgroundColor: '#222325', borderColor: '#383A3D' }}>
         <div className="marquee-track py-2">
           {Array.from({ length: 2 }).map((_, i) => (
             <span key={i} className="font-display text-base sm:text-lg md:text-xl px-4" style={{ color: BRAND }} aria-hidden={i === 1}>
@@ -424,7 +424,7 @@ return (
 
       {error && (
         <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="p-4 rounded-lg flex items-center gap-3 border-2" style={{ backgroundColor: INK, borderColor: INK }}>
+          <div className="p-4 rounded-lg flex items-center gap-3 border-2" style={{ backgroundColor: '#222325', borderColor: '#383A3D' }}>
             <AlertCircle className="w-5 h-5" style={{ color: BRAND_BRIGHT }} />
             <span className="font-semibold" style={{ color: PAPER }}>{error}</span>
           </div>
@@ -434,7 +434,7 @@ return (
       {/* Title + Timeframe Selector */}
       <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-4">
         <Reveal>
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-5 sm:mb-6" style={{ color: INK }}>
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-5 sm:mb-6" style={{ color: '#FFFFFF' }}>
             Built Different.<br />The Numbers Prove It.
           </h2>
         </Reveal>
@@ -448,7 +448,7 @@ return (
                 style={{
                   backgroundColor: timeframe === tf ? INK : BRAND,
                   color: timeframe === tf ? BRAND : INK,
-                  borderColor: INK,
+                  borderColor: '#383A3D',
                 }}
               >
                 {tf === '24h' ? 'Last 24 Hours' : tf === '7d' ? 'Last 7 Days' : tf === '30d' ? 'Last 30 Days' : 'Last 90 Days'}
@@ -519,7 +519,7 @@ return (
                     <YAxis stroke="rgba(246,246,241,0.6)" />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: INK,
+                        backgroundColor: '#222325',
                         border: `2px solid ${BRAND}`,
                         borderRadius: '8px',
                         color: PAPER,
@@ -568,7 +568,7 @@ return (
                     <Tooltip
                       cursor={{ fill: LIME_FILL }}
                       contentStyle={{
-                        backgroundColor: INK,
+                        backgroundColor: '#222325',
                         border: `2px solid ${BRAND}`,
                         borderRadius: '8px',
                         color: PAPER,
@@ -608,7 +608,7 @@ return (
                             className="h-full rounded-full transition-all duration-500"
                             style={{
                               width: `${country.percentage}%`,
-                              backgroundColor: BRAND,
+                              backgroundColor: '#171819',
                             }}
                           />
                         </div>
@@ -709,12 +709,12 @@ return (
       <footer
         aria-label="EU AI Act transparency"
         className="border-t-4"
-        style={{ backgroundColor: INK, borderColor: INK }}
+        style={{ backgroundColor: '#222325', borderColor: '#383A3D' }}
       >
         <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div
             className="pt-6 border-t"
-            style={{ borderColor: 'rgba(198,248,51,0.25)' }}
+            style={{ borderColor: 'rgba(223,255,0,0.25)' }}
           >
             <p
               className="text-xs font-semibold uppercase tracking-widest mb-3"
@@ -734,7 +734,7 @@ return (
                 href="/downloads/MOTHER-EU-Copyright-Policy.pdf"
                 target="_blank"
                 rel="noopener"
-                className="transition-colors text-[rgba(246,246,241,0.6)] hover:text-[#C6F833]"
+                className="transition-colors text-[rgba(246,246,241,0.6)] hover:text-[#DFFF00]"
               >
                 ↓ Copyright Policy — Art. 53(1)(c)
               </a>
@@ -742,7 +742,7 @@ return (
                 href="/downloads/MOTHER-Training-Content-Summary.pdf"
                 target="_blank"
                 rel="noopener"
-                className="transition-colors text-[rgba(246,246,241,0.6)] hover:text-[#C6F833]"
+                className="transition-colors text-[rgba(246,246,241,0.6)] hover:text-[#DFFF00]"
               >
                 ↓ Training-Content Summary — Art. 53(1)(d)
               </a>
@@ -750,7 +750,7 @@ return (
                 href="/downloads/MOTHER-Technology-Due-Diligence.pdf"
                 target="_blank"
                 rel="noopener"
-                className="transition-colors text-[rgba(246,246,241,0.6)] hover:text-[#C6F833]"
+                className="transition-colors text-[rgba(246,246,241,0.6)] hover:text-[#DFFF00]"
               >
                 ↓ Technology Due Diligence
               </a>
@@ -781,12 +781,12 @@ function KPICard({ title, value, icon, format = 'number', trend, pulse }: KPICar
   return (
     <div
       className="rounded-2xl p-4 sm:p-5 border-2 transition-all hover:scale-[1.03] hover:-translate-y-1 relative overflow-hidden h-full"
-      style={{ backgroundColor: INK, borderColor: INK, color: PAPER }}
+      style={{ backgroundColor: '#222325', borderColor: '#383A3D', color: PAPER }}
     >
       {pulse && value > 0 && (
         <div
           className="absolute top-3 right-3 w-2.5 h-2.5 rounded-full animate-pulse"
-          style={{ backgroundColor: BRAND, boxShadow: `0 0 12px ${BRAND}` }}
+          style={{ backgroundColor: '#171819', boxShadow: `0 0 12px ${BRAND}` }}
         />
       )}
 
@@ -826,7 +826,7 @@ function KPICard({ title, value, icon, format = 'number', trend, pulse }: KPICar
 
 function ChartCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl p-4 sm:p-6 border-2 h-full transition-all hover:-translate-y-1" style={{ backgroundColor: INK, borderColor: INK }}>
+    <div className="rounded-2xl p-4 sm:p-6 border-2 h-full transition-all hover:-translate-y-1" style={{ backgroundColor: '#222325', borderColor: '#383A3D' }}>
       <h3 className="font-display text-xl sm:text-2xl mb-4" style={{ color: BRAND }}>
         {title}
       </h3>

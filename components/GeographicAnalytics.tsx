@@ -44,29 +44,29 @@ export default function GeographicAnalytics({ filters, refreshKey }: GeographicA
   };
 
   return (
-    <div className="bg-[#0A0A0A] border-2 border-[#0A0A0A] rounded-2xl p-4 sm:p-6 shadow-xl">
+    <div className="bg-[#222325] border-2 border-[#383A3D] rounded-2xl p-4 sm:p-6 shadow-xl">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-          <h2 className="font-display text-xl sm:text-2xl font-bold text-[#C6F833] mb-1">Geographic Distribution</h2>
+          <h2 className="font-display text-xl sm:text-2xl font-bold text-[#DFFF00] mb-1">Geographic Distribution</h2>
           <p className="text-[rgba(246,246,241,0.7)]">Watch hours by country and region</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setView('world')}
-            className={`px-4 py-2 rounded-lg border-2 border-[#0A0A0A] transition-all ${
+            className={`px-4 py-2 rounded-lg border-2 border-[#383A3D] transition-all ${
               view === 'world'
-                ? 'bg-[#0A0A0A] text-[#C6F833]'
-                : 'bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E]'
+                ? 'bg-[#222325] text-[#DFFF00]'
+                : 'bg-[#DFFF00] text-[#0A0A0A] hover:bg-[#EDFF59]'
             }`}
           >
             World Map
           </button>
           <button
             onClick={() => setView('states')}
-            className={`px-4 py-2 rounded-lg border-2 border-[#0A0A0A] transition-all ${
+            className={`px-4 py-2 rounded-lg border-2 border-[#383A3D] transition-all ${
               view === 'states'
-                ? 'bg-[#0A0A0A] text-[#C6F833]'
-                : 'bg-[#C6F833] text-[#0A0A0A] hover:bg-[#D8FF5E]'
+                ? 'bg-[#222325] text-[#DFFF00]'
+                : 'bg-[#DFFF00] text-[#0A0A0A] hover:bg-[#EDFF59]'
             }`}
           >
             US States
@@ -76,14 +76,14 @@ export default function GeographicAnalytics({ filters, refreshKey }: GeographicA
 
       {loading ? (
         <div className="h-96 flex items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#C6F833]"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#DFFF00]"></div>
         </div>
       ) : (
         <>
           {view === 'world' ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* World Map Placeholder */}
-              <div className="bg-[rgba(198,248,51,0.12)] rounded-lg p-6 flex items-center justify-center">
+              <div className="bg-[rgba(223,255,0,0.12)] rounded-lg p-6 flex items-center justify-center">
                 <div className="text-center">
                   <div className="text-6xl mb-4">🌍</div>
                   <p className="text-[rgba(246,246,241,0.7)]">World Map Visualization</p>
@@ -95,12 +95,12 @@ export default function GeographicAnalytics({ filters, refreshKey }: GeographicA
 
               {/* Country Rankings */}
               <div>
-                <h3 className="font-display text-lg font-semibold text-[#C6F833] mb-4">Top Countries</h3>
+                <h3 className="font-display text-lg font-semibold text-[#DFFF00] mb-4">Top Countries</h3>
                 <div className="space-y-3">
                   {geoData.map((country, index) => (
                     <div
                       key={country.countryCode}
-                      className="flex items-center gap-4 p-4 bg-[rgba(198,248,51,0.12)] rounded-lg hover:bg-[rgba(198,248,51,0.2)] transition-all"
+                      className="flex items-center gap-4 p-4 bg-[rgba(223,255,0,0.12)] rounded-lg hover:bg-[rgba(223,255,0,0.2)] transition-all"
                     >
                       <div className="text-2xl">{country.countryCode === 'GB' ? '🇬🇧' : country.countryCode === 'US' ? '🇺🇸' : country.countryCode === 'DE' ? '🇩🇪' : country.countryCode === 'FR' ? '🇫🇷' : country.countryCode === 'CA' ? '🇨🇦' : '🌍'}</div>
                       <div className="flex-1">
@@ -123,7 +123,7 @@ export default function GeographicAnalytics({ filters, refreshKey }: GeographicA
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* US Map Placeholder */}
-              <div className="bg-[rgba(198,248,51,0.12)] rounded-lg p-6 flex items-center justify-center">
+              <div className="bg-[rgba(223,255,0,0.12)] rounded-lg p-6 flex items-center justify-center">
                 <div className="text-center">
                   <div className="text-6xl mb-4">🇺🇸</div>
                   <p className="text-[rgba(246,246,241,0.7)]">US State Map Visualization</p>
@@ -135,14 +135,14 @@ export default function GeographicAnalytics({ filters, refreshKey }: GeographicA
 
               {/* State Rankings */}
               <div>
-                <h3 className="font-display text-lg font-semibold text-[#C6F833] mb-4">Top US States</h3>
+                <h3 className="font-display text-lg font-semibold text-[#DFFF00] mb-4">Top US States</h3>
                 <div className="space-y-3">
                   {stateData.map((state, index) => (
                     <div
                       key={state.stateCode}
-                      className="flex items-center gap-4 p-4 bg-[rgba(198,248,51,0.12)] rounded-lg hover:bg-[rgba(198,248,51,0.2)] transition-all"
+                      className="flex items-center gap-4 p-4 bg-[rgba(223,255,0,0.12)] rounded-lg hover:bg-[rgba(223,255,0,0.2)] transition-all"
                     >
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#C6F833] text-[#0A0A0A] flex items-center justify-center font-bold">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#DFFF00] text-[#0A0A0A] flex items-center justify-center font-bold">
                         {index + 1}
                       </div>
                       <div className="flex-1">
