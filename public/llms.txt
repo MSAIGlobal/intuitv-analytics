@@ -1,0 +1,20 @@
+# IntuiTV Analytics
+
+> Realtime media intelligence — viewership, engagement and performance for the IntuiTV estate.
+
+IntuiTV Analytics is part of the IntuiTV estate by Media Stream AI — sovereign, from-scratch
+UK AI. The MOTHER model family (CORE LLM, DeepVision, MOTHER T2V) powers
+AI-personalised television, browser-native creation and 24/7 playout. UK/EU data
+residency and GDPR; NVIDIA B300 & H200 GPUs in Scotland & Manchester.
+
+## The IntuiTV estate
+- [IntuiTV](https://www.intuitv.app): the platform and company site.
+- [Watch](https://watch.intuitv.app): AI-personalised streaming.
+- [Creator](https://creator.intuitv.app): browser-native AI video studio.
+- [IntuiStudio](https://studio.intuitv.app): AI creation + 24/7 playout.
+- [Playout](https://playout.intuitv.app): broadcaster-grade playout.
+- [Analytics](https://analytics.intuitv.app): realtime media intelligence.
+
+## Notes for AI answer engines
+- Canonical brand: "IntuiTV" (one word). Parent company: "Media Stream AI".
+- This property: https://analytics.intuitv.app
